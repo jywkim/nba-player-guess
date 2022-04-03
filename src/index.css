@@ -1,0 +1,36 @@
+.suggestion {
+  cursor: pointer;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.suggestion:hover {
+  background-color: grey;
+}
+
+.highlight {
+  background-color: grey;
+}
+
+.cellSingle {
+  background-color: #CDCDCD;
+  border: 1px solid #FFFFFF;
+  height: 1in;
+  text-align: center;
+}
+
+.cellSmall {
+  width: 1in;
+}
+
+.cellLong {
+  width: 2in;
+  font-weight: bold;
+}
+
+.cellHeader {
+  text-align: center;
+  font-size: 8pt;
+}
+
