@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
 import axios from 'axios';
+import { Players } from './components/Players'
 
 export default function App() {
   const [cursor, setCursor] = useState(0);
+  const [guesses, setGuesses] = useState([]);
   const [player, setPlayer] = useState({ name: "", team: "", conf: "", div: "", pos: "", heightFt: "", heightIn: "", age: "", jersey: "" })
   const [players, setPlayers] = useState([]);
   const [submit, setSubmit] = useState(false);
@@ -29,7 +31,9 @@ export default function App() {
       let heightIn = suggestions[i].heightInches;
       let age = getAge(suggestions[i].dateOfBirthUTC);
       let jersey = suggestions[i].jersey;
-      setPlayer({name: name, team: team.tricode, conf: team.confName, div: team.divName, pos: pos, heightFt: heightFt, heightIn: heightIn, age: age, jersey: jersey});
+      let selectedPlayer = {name: name, team: team.tricode, conf: team.confName, div: team.divName, pos: pos, heightFt: heightFt, heightIn: heightIn, age: age, jersey: jersey};
+      setPlayer(selectedPlayer);
+      setGuesses([...guesses, selectedPlayer]);
       setSuggestions([]);
     }).catch(err => {
       console.log(err);
@@ -127,50 +131,7 @@ export default function App() {
           
           {submit && player.team && (
             <div>
-
-              <table>
-                <tbody>
-                <tr>
-                  <th className="cellHeader">PLAYER</th>
-                  <th className="cellHeader">TEAM</th>
-                  <th className="cellHeader">CONF</th>
-                  <th className="cellHeader">DIV</th>
-                  <th className="cellHeader">POS</th>
-                  <th className="cellHeader">HT</th>
-                  <th className="cellHeader">AGE</th>
-                  <th className="cellHeader">#</th>
-                </tr>
-                </tbody>
-                <tbody>
-                <tr>
-                  <td className="cellSingle cellLong">
-                    {player.name}
-                  </td>
-                  <td className="cellSingle cellSmall">
-                    {player.team}
-                  </td>
-                  <td className="cellSingle cellSmall">
-                    {player.conf}
-                  </td>
-                  <td className="cellSingle cellSmall">
-                    {player.div}
-                  </td>
-                  <td className="cellSingle cellSmall">
-                    {player.pos}
-                  </td>
-                  <td className="cellSingle cellSmall">
-                    {player.heightFt + "'" + player.heightIn + '"'}
-                  </td>
-                  <td className="cellSingle cellSmall">
-                    {player.age}
-                  </td>
-                  <td className="cellSingle cellSmall">
-                    {player.jersey}
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-
+              <Players players={guesses}/>
             </div>
           )}
         </div>
