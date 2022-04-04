@@ -6,9 +6,9 @@ import { Players } from './components/Players'
 export default function App() {
   const [cursor, setCursor] = useState(0);
   const [guesses, setGuesses] = useState([]);
-  const [player, setPlayer] = useState({ name: "", team: "", conf: "", div: "", pos: "", heightFt: "", heightIn: "", age: "", jersey: "" })
+  const [player, setPlayer] = useState({ name: "", personId: "", team: "", teamId: "", teams: [], conf: "", div: "", pos: "", heightFt: "", heightIn: "", age: "", jersey: "" })
   const [players, setPlayers] = useState([]);
-  const [randomPlayer, setRandomPlayer] = useState({ name: "", team: "", conf: "", div: "", pos: "", heightFt: "", heightIn: "", age: "", jersey: "" })
+  const [randomPlayer, setRandomPlayer] = useState({ name: "", personId: "", team: "", teamId: "", teams: [], conf: "", div: "", pos: "", heightFt: "", heightIn: "", age: "", jersey: "" })
   const [submit, setSubmit] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
   const urlPlayers = "https://data.nba.net/data/10s/prod/v1/2021/players.json";
@@ -17,16 +17,10 @@ export default function App() {
   useEffect(() => {
     const getRandomPlayer = async () => {
       const resPlayers = await axios.get(urlPlayers);
-      let randomPlayer = resPlayers.data.league.standard.find(x => x.personId === "1629027"); //Trae Young
+      let randomPlayer = resPlayers.data.league.standard.find(p => p.personId === "1629027"); //Trae Young
       const resTeams = await axios.get(urlTeams);
       let name = randomPlayer.firstName + ' ' + randomPlayer.lastName;
-      let team = resTeams.data.league.standard.find(x => x.teamId === randomPlayer.teamId);
-      let pos = randomPlayer.pos;
-      let heightFt = randomPlayer.heightFeet;
-      let heightIn = randomPlayer.heightInches;
-      let age = getAge(randomPlayer.dateOfBirthUTC);
-      let jersey = randomPlayer.jersey;
-      let randomPlayerObj = {name: name, team: team.tricode, conf: team.confName, div: team.divName, pos: pos, heightFt: heightFt, heightIn: heightIn, age: age, jersey: jersey};
+      let randomPlayerObj = createPlayerObject(name, randomPlayer, resTeams);
       setRandomPlayer(randomPlayerObj);
     }
     const loadPlayers = async () => {
@@ -36,9 +30,12 @@ export default function App() {
     }
     getRandomPlayer();
     loadPlayers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const checkPlayer = (selectedPlayer) => {
+    if (selectedPlayer.personId === randomPlayer.personId) alert("MATCH!");
+
     let statusPlayer = selectedPlayer;
     let selectedAge = parseInt(selectedPlayer.age);
     let randomAge = parseInt(randomPlayer.age);
@@ -61,7 +58,7 @@ export default function App() {
   }
 
   const checkAge = (selectedAge, randomAge)  => {
-    return checkWithinTwo(selectedAge, randomAge)
+    return checkWithinTwo(selectedAge, randomAge);
   }
 
   const checkConference = (selectedPlayer, randomPlayer) => {
@@ -78,18 +75,18 @@ export default function App() {
   }
 
   const checkHeight = (selectedInchesTotal, randomInchesTotal) => {
-    return checkWithinTwo(selectedInchesTotal, randomInchesTotal)
+    return checkWithinTwo(selectedInchesTotal, randomInchesTotal);
   }
 
   const checkJersey = (selectedJersey, randomJersey)  => {
-    return checkWithinTwo(selectedJersey, randomJersey)
+    return checkWithinTwo(selectedJersey, randomJersey);
   }
 
   const checkPosition = (selectedPlayer, randomPlayer) => {
     if (selectedPlayer.pos === randomPlayer.pos) return "green";
     let selectedPos = selectedPlayer.pos.replace(/[^a-zA-Z]+/g, '');
     let randomPos = randomPlayer.pos.replace(/[^a-zA-Z]+/g, '');
-    let randomPosSplit = randomPos.split("")
+    let randomPosSplit = randomPos.split("");
     for (let i = 0; i < randomPosSplit.length; i++) {
       if (selectedPos.includes(randomPos[i])) return "yellow";
     }
@@ -97,28 +94,33 @@ export default function App() {
 
   const checkTeam = (selectedPlayer, randomPlayer) => {
     if (selectedPlayer.team === randomPlayer.team) return "green";
+    let selectedPlayerTeams = selectedPlayer.teams.map(t => t.teamId);
+    if (selectedPlayerTeams.includes(randomPlayer.teamId)) return "yellow";
   }
 
   const checkWithinTwo = (selected, random) => {
     if (selected === random) return "green";
-    if (selected > random) {
-      if (selected <= random + 2) return "yellow";
-    }
-    if (selected < random) {
-      if (selected >= random - 2) return "yellow";
-    }
+    if (selected >= random - 2 && selected <= random + 2) return "yellow";
+  }
+
+  const createPlayerObject = (name, playerRes, teamRes) => {
+    let personId = playerRes.personId;
+    let team = teamRes.data.league.standard.find(t => t.teamId === playerRes.teamId);
+    let teamId = playerRes.teamId;
+    let teams = playerRes.teams;
+    let pos = playerRes.pos;
+    let heightFt = playerRes.heightFeet;
+    let heightIn = playerRes.heightInches;
+    let age = getAge(playerRes.dateOfBirthUTC);
+    let jersey = playerRes.jersey;
+    let playerObject = {name: name, personId: personId, team: team.tricode, teamId: teamId, teams: teams, conf: team.confName, div: team.divName, pos: pos, heightFt: heightFt, heightIn: heightIn, age: age, jersey: jersey};
+    return playerObject;
   }
 
   const enterPlayer = (name, suggestions, i) => {
     axios.get(urlTeams)
     .then(async res => {
-      let team = res.data.league.standard.find(x => x.teamId === suggestions[i].teamId);
-      let pos = suggestions[i].pos;
-      let heightFt = suggestions[i].heightFeet;
-      let heightIn = suggestions[i].heightInches;
-      let age = getAge(suggestions[i].dateOfBirthUTC);
-      let jersey = suggestions[i].jersey;
-      let selectedPlayer = {name: name, team: team.tricode, conf: team.confName, div: team.divName, pos: pos, heightFt: heightFt, heightIn: heightIn, age: age, jersey: jersey};
+      let selectedPlayer = createPlayerObject(name, suggestions[i], res);
       setPlayer(selectedPlayer);
       let checkedPlayer = checkPlayer(selectedPlayer);
       setGuesses([...guesses, checkedPlayer]);
