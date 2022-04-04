@@ -5,28 +5,53 @@ export const Players = ({players}) => {
         return(
               <tr key = {index}>
                   <td className="cellSingle cellLong">
-                    {player.name}
+                    <div>
+                      {player.name}
+                    </div>
                   </td>
-                  <td className="cellSingle cellSmall">
-                    {player.team}
+                  <td className={"cellSingle cellSmall " + (player.teamStatus)}>
+                    <div>
+                      {player.team}
+                    </div>
                   </td>
-                  <td className="cellSingle cellSmall">
-                    {player.conf}
+                  <td className={"cellSingle cellSmall " + (player.confStatus)}>
+                    <div>
+                      {player.conf}
+                    </div>
                   </td>
-                  <td className="cellSingle cellSmall">
-                    {player.div}
+                  <td className={"cellSingle cellSmall " + (player.divStatus)}>
+                    <div>
+                      {player.div}
+                    </div>
                   </td>
-                  <td className="cellSingle cellSmall">
-                    {player.pos}
+                  <td className={"cellSingle cellSmall " + (player.posStatus)}>
+                    <div>
+                      {player.pos}
+                    </div>
                   </td>
-                  <td className="cellSingle cellSmall">
-                    {player.heightFt + "'" + player.heightIn + '"'}
+                  <td className={"cellSingle cellSmall " + (player.heightStatus)}>
+                    <div>
+                      {player.heightFt + "'" + player.heightIn + '"'}
+                    </div>
+                    <div>
+                      {player.heightDirection}
+                    </div>
                   </td>
-                  <td className="cellSingle cellSmall">
-                    {player.age}
+                  <td className={"cellSingle cellSmall " + (player.ageStatus)}>
+                    <div>
+                      {player.age}
+                    </div>
+                    <div>
+                      {player.ageDirection}
+                    </div>
                   </td>
-                  <td className="cellSingle cellSmall">
-                    {player.jersey}
+                  <td className={"cellSingle cellSmall " + (player.jerseyStatus)}>
+                    <div>
+                      {player.jersey}
+                    </div>
+                    <div>
+                      {player.jerseyDirection}
+                    </div>
                   </td>
               </tr>
           )

@@ -14,7 +14,7 @@
 }
 
 .cellSingle {
-  background-color: #CDCDCD;
+  background-color: #edeae5;
   border: 1px solid #FFFFFF;
   height: 1in;
   text-align: center;
@@ -34,3 +34,10 @@
   font-size: 8pt;
 }
 
+.green {
+  background-color: #37be75;
+}
+
+.yellow {
+  background-color: #f4e878;
+}
