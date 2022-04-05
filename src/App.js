@@ -20,7 +20,10 @@ export default function App() {
   useEffect(() => {
     const getRandomPlayer = async () => {
       const resPlayers = await axios.get(urlPlayers);
-      let randomPlayer = resPlayers.data.league.standard.find(p => p.personId === "1629027"); //Trae Young
+      let playerIds = resPlayers.data.league.standard.map(p => p.personId);
+      let randomPlayerId = playerIds[Math.floor(Math.random() * playerIds.length)];
+      let randomPlayer = resPlayers.data.league.standard.find(p => p.personId === randomPlayerId);
+      console.log(randomPlayer);
       const resTeams = await axios.get(urlTeams);
       let name = randomPlayer.firstName + ' ' + randomPlayer.lastName;
       let randomPlayerObj = createPlayerObject(name, randomPlayer, resTeams);
@@ -232,14 +235,14 @@ export default function App() {
 
   return (
     <div className="container" align="center">
-        <div className="col-lg-6">
+        <div className="col-lg-10">
           <h1 className="font-weight-light">NBA Player Guess</h1><br></br>
           <form
             id="formPlayer"
             onSubmit={handleSubmit}
             autoComplete="off">
             <input
-              className="col-md-12 input"
+              className="col-md-6 input"
               name="playerName"
               type="text"
               value={player.name}
@@ -253,7 +256,7 @@ export default function App() {
             {suggestions && suggestions.map((suggestion, i) =>
               <div key={i}
                   id={i}
-                  className={"suggestion col-md-12 justify-content-md-center " + (cursor === i ? "highlight" : null)}
+                  className={"suggestion col-md-6 justify-content-md-center " + (cursor === i ? "highlight" : null)}
                   onMouseDown={() => handleMouseDown(suggestion, i)}
               >{suggestion.firstName} {suggestion.lastName}</div>
             )}

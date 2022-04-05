@@ -1,16 +1,11 @@
-.suggestion {
-  cursor: pointer;
-  border-right: 1px solid black;
-  border-left: 1px solid black;
-  border-bottom: 1px solid black;
+.cellHeader {
+  text-align: center;
+  font-size: 8pt;
 }
 
-.suggestion:hover {
-  background-color: grey;
-}
-
-.highlight {
-  background-color: grey;
+.cellLong {
+  width: 3in;
+  font-weight: bold;
 }
 
 .cellSingle {
@@ -24,18 +19,17 @@
   width: 1in;
 }
 
-.cellLong {
-  width: 2in;
-  font-weight: bold;
-}
-
-.cellHeader {
-  text-align: center;
-  font-size: 8pt;
-}
-
 .green {
   background-color: #37be75;
+  color: #fff;
+}
+
+.highlight {
+  background-color: grey;
+}
+
+.red {
+  background-color: #920000;
   color: #fff;
 }
 
@@ -43,7 +37,13 @@
   background-color: #f4e878;
 }
 
-.red {
-  background-color: #920000;
-  color: #fff;
+.suggestion {
+  cursor: pointer;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.suggestion:hover {
+  background-color: grey;
 }

@@ -61,7 +61,7 @@ export const Players = ({players}) => {
 
       const tableHeader = <thead>
                             <tr>
-                                <th className="cellHeader">PLAYER</th>
+                                <th className="cellHeader"></th>
                                 <th className="cellHeader">TEAM</th>
                                 <th className="cellHeader">CONF</th>
                                 <th className="cellHeader">DIV</th>
