@@ -30,27 +30,33 @@ export const Players = ({players}) => {
                     </div>
                   </td>
                   <td className={"cellSingle cellSmall " + (player.heightStatus)}>
-                    <div>
-                      {player.heightFt + "'" + player.heightIn + '"'}
-                    </div>
-                    <div>
-                      {player.heightDirection}
+                    <div className="cellDirection">
+                      <div className="dirVal">
+                        {player.heightFt + "'" + player.heightIn + '"'}
+                      </div>
+                      <div className="dirArrow">
+                        {player.heightDirection}
+                      </div>
                     </div>
                   </td>
                   <td className={"cellSingle cellSmall " + (player.ageStatus)}>
-                    <div>
-                      {player.age}
-                    </div>
-                    <div>
-                      {player.ageDirection}
+                    <div className="cellDirection">
+                      <div className="dirVal">
+                        {player.age}
+                      </div>
+                      <div className="dirArrow">
+                        {player.ageDirection}
+                      </div>
                     </div>
                   </td>
                   <td className={"cellSingle cellSmall " + (player.jerseyStatus)}>
-                    <div>
+                    <div className="cellDirection">
+                      <div className="dirVal">
                       {player.jersey}
-                    </div>
-                    <div>
+                      </div>
+                      <div className="dirArrow">
                       {player.jerseyDirection}
+                      </div>
                     </div>
                   </td>
               </tr>
@@ -60,7 +66,7 @@ export const Players = ({players}) => {
       const PlayerTable = players.map((play, index) => PlayerRow(play, index))
 
       const tableHeader = <thead>
-                            <tr>
+                            <tr className="rowHeader">
                                 <th className="cellHeader"></th>
                                 <th className="cellHeader">TEAM</th>
                                 <th className="cellHeader">CONF</th>

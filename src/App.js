@@ -241,31 +241,37 @@ export default function App() {
             id="formPlayer"
             onSubmit={handleSubmit}
             autoComplete="off">
-            <input
-              className="col-md-6 input"
-              name="playerName"
-              type="text"
-              value={player.name}
-              onChange={handleChange}
-              placeholder={placeholder}
-              onBlur={handleBlur}
-              onKeyDown={handleKeyDown}
-              disabled={disabled}
-            >
-            </input>
-            {suggestions && suggestions.map((suggestion, i) =>
-              <div key={i}
-                  id={i}
-                  className={"suggestion col-md-6 justify-content-md-center " + (cursor === i ? "highlight" : null)}
-                  onMouseDown={() => handleMouseDown(suggestion, i)}
-              >{suggestion.firstName} {suggestion.lastName}</div>
-            )}
+            <div className="containersContainer">
+              <div className="inputContainer">
+                <input
+                  className="col-md-6 input"
+                  name="playerName"
+                  type="text"
+                  value={player.name}
+                  onChange={handleChange}
+                  placeholder={placeholder}
+                  onBlur={handleBlur}
+                  onKeyDown={handleKeyDown}
+                  disabled={disabled}
+                >
+                </input>
+              </div>
+              <div className="suggestionContainer">
+                {suggestions && suggestions.map((suggestion, i) =>
+                  <div key={i}
+                      id={i}
+                      className={"suggestion col-md-6 justify-content-md-center " + (cursor === i ? "highlight" : null)}
+                      onMouseDown={() => handleMouseDown(suggestion, i)}
+                  >{suggestion.firstName} {suggestion.lastName}</div>
+                )}
+              </div>
+            </div>
           </form>
 
           <br></br>
 
           {submit && guesses && (
-            <div>
+            <div className="playersContainer">
               <Players players={guesses}/>
             </div>
           )}
