@@ -4,7 +4,7 @@ export const Players = ({players}) => {
     const PlayerRow = (player,index) => {
         return(
               <tr key = {index}>
-                  <td className="cellSingle cellLong">
+                  <td className={"cellSingle cellLong " + (player.nameStatus)}>
                     <div>
                       {player.name}
                     </div>

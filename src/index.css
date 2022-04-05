@@ -36,8 +36,14 @@
 
 .green {
   background-color: #37be75;
+  color: #fff;
 }
 
 .yellow {
   background-color: #f4e878;
+}
+
+.red {
+  background-color: #920000;
+  color: #fff;
 }

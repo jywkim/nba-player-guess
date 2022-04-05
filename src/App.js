@@ -4,8 +4,11 @@ import axios from 'axios';
 import { Players } from './components/Players'
 
 export default function App() {
+  const [counter, setCounter] = useState(1);
   const [cursor, setCursor] = useState(0);
+  const [disabled, setDisabled] = useState(false);
   const [guesses, setGuesses] = useState([]);
+  const [placeholder, setPlaceholder] = useState("Guess 1 of 8");
   const [player, setPlayer] = useState({ name: "", personId: "", team: "", teamId: "", teams: [], conf: "", div: "", pos: "", heightFt: "", heightIn: "", age: "", jersey: "" })
   const [players, setPlayers] = useState([]);
   const [randomPlayer, setRandomPlayer] = useState({ name: "", personId: "", team: "", teamId: "", teams: [], conf: "", div: "", pos: "", heightFt: "", heightIn: "", age: "", jersey: "" })
@@ -33,28 +36,59 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const checkPlayer = (selectedPlayer) => {
-    if (selectedPlayer.personId === randomPlayer.personId) alert("MATCH!");
+  const changePlaceholder = (selectedPlayer) => {
+    if (selectedPlayer.personId === randomPlayer.personId) {
+      return "You solved it in " + counter + "!";
+    } else {
+      return counter < 8 ? "Guess " + (counter + 1) + " of 8" : "Game Over";
+    }
+  }
 
+  const changePlayerStatus = (player, name, team, conf, div, pos, height, age, jersey) => {
+    player.nameStatus = name;
+    player.teamStatus = team;
+    player.confStatus = conf;
+    player.divStatus = div;
+    player.posStatus = pos;
+    player.heightStatus = height;
+    player.ageStatus = age;
+    player.jerseyStatus = jersey;
+    return player;
+  }
+
+  const checkPlayer = (selectedPlayer) => {
     let statusPlayer = selectedPlayer;
+    if (selectedPlayer.personId === randomPlayer.personId) {
+      setDisabled(true);
+      statusPlayer.nameStatus = "green";
+      alert("Match!\n" + randomPlayer.name + "\nYou solved it in " + (counter) + (counter === 1 ? " guess" : " guesses"));
+    }
+    if (counter === 8 && selectedPlayer.personId !== randomPlayer.personId) {
+      setDisabled(true);
+      statusPlayer.final = true;
+      alert("Sorry, the correct answer is\n" + randomPlayer.name + "\nPlease try again!");
+    }
+
     let selectedAge = parseInt(selectedPlayer.age);
     let randomAge = parseInt(randomPlayer.age);
     let selectedInchesTotal = parseInt(selectedPlayer.heightFt) * 12 + parseInt(selectedPlayer.heightIn);
     let randomInchesTotal = parseInt(randomPlayer.heightFt) * 12 + parseInt(randomPlayer.heightIn);
     let selectedJersey = parseInt(selectedPlayer.jersey);
     let randomJersey = parseInt(randomPlayer.jersey);
-  
-    statusPlayer.teamStatus = checkTeam(selectedPlayer, randomPlayer);
-    statusPlayer.confStatus = checkConference(selectedPlayer, randomPlayer);
-    statusPlayer.divStatus = checkDivision(selectedPlayer, randomPlayer);
-    statusPlayer.posStatus = checkPosition(selectedPlayer, randomPlayer);
-    statusPlayer.heightStatus = checkHeight(selectedInchesTotal, randomInchesTotal);
-    statusPlayer.heightDirection = checkDirection(selectedInchesTotal, randomInchesTotal);
-    statusPlayer.ageStatus = checkAge(selectedAge, randomAge);
-    statusPlayer.ageDirection = checkDirection(selectedAge, randomAge);
-    statusPlayer.jerseyStatus = checkJersey(selectedJersey, randomJersey);
-    statusPlayer.jerseyDirection = checkDirection(selectedJersey, randomJersey);
-    return statusPlayer;
+
+    let teamStatus = checkTeam(selectedPlayer, randomPlayer);
+    let confStatus = checkConference(selectedPlayer, randomPlayer);
+    let divStatus = checkDivision(selectedPlayer, randomPlayer);
+    let posStatus = checkPosition(selectedPlayer, randomPlayer);
+    let heightStatus = checkHeight(selectedInchesTotal, randomInchesTotal);
+    let ageStatus = checkAge(selectedAge, randomAge);
+    let jerseyStatus = checkJersey(selectedJersey, randomJersey);
+    let selectedPlayerStatus = changePlayerStatus(statusPlayer, statusPlayer.nameStatus, teamStatus, confStatus, divStatus, posStatus, heightStatus, ageStatus, jerseyStatus);
+
+    selectedPlayerStatus.heightDirection = checkDirection(selectedInchesTotal, randomInchesTotal);
+    selectedPlayerStatus.ageDirection = checkDirection(selectedAge, randomAge);
+    selectedPlayerStatus.jerseyDirection = checkDirection(selectedJersey, randomJersey);
+    return selectedPlayerStatus;
   }
 
   const checkAge = (selectedAge, randomAge)  => {
@@ -123,8 +157,15 @@ export default function App() {
       let selectedPlayer = createPlayerObject(name, suggestions[i], res);
       setPlayer(selectedPlayer);
       let checkedPlayer = checkPlayer(selectedPlayer);
-      setGuesses([...guesses, checkedPlayer]);
+      setGuesses((g) => ([ ...g, checkedPlayer ]));
+      if (checkedPlayer.final) {
+        let randomPlayerStatus = changePlayerStatus(randomPlayer, "red", "red", "red", "red", "red", "red", "red", "red");
+        setGuesses((g) => ([ ...g, randomPlayerStatus ]));
+      }
       setSuggestions([]);
+      setCounter(counter + 1);
+      setPlayer({ name: "" });
+      setPlaceholder(changePlaceholder(selectedPlayer));
     }).catch(err => {
       console.log(err);
     })
@@ -138,7 +179,7 @@ export default function App() {
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
         age--;
     }
-    return age;  
+    return age;
   }
 
   const handleBlur = (e) => {
@@ -193,7 +234,7 @@ export default function App() {
     <div className="container" align="center">
         <div className="col-lg-6">
           <h1 className="font-weight-light">NBA Player Guess</h1><br></br>
-          <form 
+          <form
             id="formPlayer"
             onSubmit={handleSubmit}
             autoComplete="off">
@@ -203,23 +244,24 @@ export default function App() {
               type="text"
               value={player.name}
               onChange={handleChange}
-              placeholder="Please enter player's name"
+              placeholder={placeholder}
               onBlur={handleBlur}
-              onKeyDown={ handleKeyDown }
+              onKeyDown={handleKeyDown}
+              disabled={disabled}
             >
             </input>
-            {suggestions && suggestions.map((suggestion, i) => 
+            {suggestions && suggestions.map((suggestion, i) =>
               <div key={i}
-                  id={i} 
+                  id={i}
                   className={"suggestion col-md-12 justify-content-md-center " + (cursor === i ? "highlight" : null)}
                   onMouseDown={() => handleMouseDown(suggestion, i)}
               >{suggestion.firstName} {suggestion.lastName}</div>
             )}
           </form>
-          
+
           <br></br>
-          
-          {submit && player.team && (
+
+          {submit && guesses && (
             <div>
               <Players players={guesses}/>
             </div>
