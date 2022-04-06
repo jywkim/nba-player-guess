@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
 import axios from 'axios';
-import { Players } from './components/Players'
+import { Players } from './components/Players';
+import Popup from './components/Popup';
 
 export default function App() {
   const [counter, setCounter] = useState(1);
@@ -11,9 +12,12 @@ export default function App() {
   const [placeholder, setPlaceholder] = useState("Guess 1 of 8");
   const [player, setPlayer] = useState({ name: "", personId: "", team: "", teamId: "", teams: [], conf: "", div: "", pos: "", heightFt: "", heightIn: "", age: "", jersey: "" })
   const [players, setPlayers] = useState([]);
+  const [popupContent, setPopupContent] = useState([]);
+  const [popupDisplay, setPopupDisplay] = useState(false);
   const [randomPlayer, setRandomPlayer] = useState({ name: "", personId: "", team: "", teamId: "", teams: [], conf: "", div: "", pos: "", heightFt: "", heightIn: "", age: "", jersey: "" })
   const [submit, setSubmit] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
+  const urlPlayerPic = "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/" + randomPlayer.personId + ".png"
   const urlPlayers = "https://data.nba.net/data/10s/prod/v1/2021/players.json";
   const urlTeams = "https://data.nba.net/data/10s/prod/v1/2021/teams.json";
 
@@ -64,12 +68,14 @@ export default function App() {
     if (selectedPlayer.personId === randomPlayer.personId) {
       setDisabled(true);
       statusPlayer.nameStatus = "green";
-      alert("Match!\n" + randomPlayer.name + "\nYou solved it in " + (counter) + (counter === 1 ? " guess" : " guesses"));
+      setPopupContent(["Match!", randomPlayer.name.toUpperCase(), "You solved it in " + (counter) + (counter === 1 ? " guess" : " guesses")]);
+      setPopupDisplay(true);
     }
     if (counter === 8 && selectedPlayer.personId !== randomPlayer.personId) {
       setDisabled(true);
       statusPlayer.final = true;
-      alert("Sorry, the correct answer is\n" + randomPlayer.name + "\nPlease try again!");
+      setPopupContent(["Sorry, the correct answer is", randomPlayer.name.toUpperCase(), "Please try again!"]);
+      setPopupDisplay(true);
     }
 
     let selectedAge = parseInt(selectedPlayer.age);
@@ -236,7 +242,8 @@ export default function App() {
   return (
     <div className="container" align="center">
         <div className="col-lg-10">
-          <h1 className="font-weight-light">NBA Player Guess</h1><br></br>
+          <h1 className="titleH1">NBA Player Guessing Game</h1>
+          <br/>
           <form
             id="formPlayer"
             onSubmit={handleSubmit}
@@ -267,14 +274,22 @@ export default function App() {
               </div>
             </div>
           </form>
-
-          <br></br>
-
+          <br/>
           {submit && guesses && (
             <div className="playersContainer">
               <Players players={guesses}/>
             </div>
           )}
+
+          <Popup trigger={popupDisplay} setTrigger={setPopupDisplay}>
+            <img src={urlPlayerPic} alt="Mystery Player"></img>
+            <br/><br/>
+            <div className="popupResult">
+              <h1 className="popupH2">{popupContent[0]}</h1>
+              <h1 className="popupH1">{popupContent[1]}</h1>
+              <h1 className="popupH2">{popupContent[2]}</h1>
+            </div>
+          </Popup>
         </div>
     </div>
   );

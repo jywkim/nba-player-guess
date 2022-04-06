@@ -29,8 +29,11 @@
 
 .dirArrow {
   position: absolute;
-  margin-left: 38px;
-  margin-top: -5px;
+  width: 100%;
+}
+
+.dirVal {
+  position: relative;
 }
 
 .green {
@@ -42,13 +45,18 @@
   background-color: grey !important;
 }
 
+.popupH1 {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.popupH2 {
+  font-size: 20px;
+}
+
 .red {
   background-color: #920000;
   color: #fff;
-}
-
-.yellow {
-  background-color: #f4e878;
 }
 
 .suggestion {
@@ -67,4 +75,8 @@
   z-index: 5;
   position: absolute;
   width: 100%;
+}
+
+.yellow {
+  background-color: #f4e878;
 }
