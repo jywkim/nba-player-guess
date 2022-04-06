@@ -28,10 +28,14 @@ export default function App() {
       let randomPlayerId = playerIds[Math.floor(Math.random() * playerIds.length)];
       let randomPlayer = resPlayers.data.league.standard.find(p => p.personId === randomPlayerId);
       console.log(randomPlayer);
-      const resTeams = await axios.get(urlTeams);
-      let name = randomPlayer.firstName + ' ' + randomPlayer.lastName;
-      let randomPlayerObj = createPlayerObject(name, randomPlayer, resTeams);
-      setRandomPlayer(randomPlayerObj);
+      axios.get(urlTeams)
+        .then(async res => {
+          let name = randomPlayer.firstName + ' ' + randomPlayer.lastName;
+          let randomPlayerObj = createPlayerObject(name, randomPlayer, res);
+          setRandomPlayer(randomPlayerObj);
+        }).catch(err => {
+          console.log(err);
+        })
     }
     const loadPlayers = async () => {
       const response = await axios.get(urlPlayers);

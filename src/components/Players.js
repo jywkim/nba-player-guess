@@ -65,7 +65,7 @@ export const Players = ({players}) => {
 
       const PlayerTable = players.map((play, index) => PlayerRow(play, index))
 
-      const tableHeader = <thead>
+      const tableHeader = <thead className="classHeader">
                             <tr className="rowHeader">
                                 <th className="cellHeader"></th>
                                 <th className="cellHeader">TEAM</th>
