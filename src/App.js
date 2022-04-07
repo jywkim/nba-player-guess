@@ -3,18 +3,22 @@ import "./index.css";
 import axios from 'axios';
 import { Players } from './components/Players';
 import Popup from './components/Popup';
+import {Header} from './components/Header';
+import {Footer} from './components/Footer';
 
 export default function App() {
   const [counter, setCounter] = useState(1);
   const [cursor, setCursor] = useState(0);
   const [disabled, setDisabled] = useState(false);
   const [guesses, setGuesses] = useState([]);
+  const [instructions, setInstructions] = useState(false);
   const [placeholder, setPlaceholder] = useState("Guess 1 of 8");
   const [player, setPlayer] = useState({ name: "", personId: "", team: "", teamId: "", teams: [], conf: "", div: "", pos: "", heightFt: "", heightIn: "", age: "", jersey: "" })
   const [players, setPlayers] = useState([]);
   const [popupContent, setPopupContent] = useState([]);
   const [popupDisplay, setPopupDisplay] = useState(false);
   const [randomPlayer, setRandomPlayer] = useState({ name: "", personId: "", team: "", teamId: "", teams: [], conf: "", div: "", pos: "", heightFt: "", heightIn: "", age: "", jersey: "" })
+  const [silhouette, setSilhouette] = useState(false);
   const [submit, setSubmit] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
   const urlPlayerPic = "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/" + randomPlayer.personId + ".png"
@@ -225,6 +229,8 @@ export default function App() {
     } else if (e.keyCode === 13) {
       let name = suggestions[cursor] ? (suggestions[cursor].firstName + " " + suggestions[cursor].lastName) : "";
       if (name.length) {
+        setSilhouette(false);
+        setInstructions(false);
         enterPlayer(name, suggestions, cursor);
       }
     }
@@ -243,8 +249,31 @@ export default function App() {
     }
   }
 
+  const showInstructions = () => {
+    setInstructions(true);
+    setSilhouette(false);
+    setPopupContent(
+      ["Guess the mystery player!", 
+      "You have 8 guesses", 
+      "Green in any column = Match",
+      "Yellow in TEAM column = Player's old team'",
+      "Yellow in POS column = Partial match",
+      "Yellow in other columns = Within 2 (inches, years, numbers)"
+    ]);
+    setPopupDisplay(true);
+  }
+
+  const showSilhouette = () => {
+    setSilhouette(true);
+    setInstructions(false);
+    setPopupContent(["Who is this", "MYSTERY PLAYER?", ""]);
+    setPopupDisplay(true);
+  }
+
   return (
     <div className="container" align="center">
+        <Header className="header" instructions={showInstructions}/>
+        <br/>
         <div className="col-lg-10">
           <h1 className="titleH1">NBA Player Guessing Game</h1>
           <br/>
@@ -279,6 +308,12 @@ export default function App() {
             </div>
           </form>
           <br/>
+          <div className="silhouetteDiv">
+            <button className="silhouetteButton"
+              onClick={showSilhouette}
+            >SHOW SILHOUETTE</button>
+          </div>
+          <br/>
           {submit && guesses && (
             <div className="playersContainer">
               <Players players={guesses}/>
@@ -286,15 +321,31 @@ export default function App() {
           )}
 
           <Popup trigger={popupDisplay} setTrigger={setPopupDisplay}>
-            <img src={urlPlayerPic} alt="Mystery Player"></img>
-            <br/><br/>
-            <div className="popupResult">
-              <h1 className="popupH2">{popupContent[0]}</h1>
-              <h1 className="popupH1">{popupContent[1]}</h1>
-              <h1 className="popupH2">{popupContent[2]}</h1>
+            {!instructions ? (
+            <div>
+              <img 
+                src={urlPlayerPic} 
+                alt="Mystery Player"
+                className={silhouette ? "silhouette" : ""}
+              ></img>
+              <br/><br/>
+              <div className="popupResult">
+                <h1 className="popupH2">{popupContent[0]}</h1>
+                <h1 className="popupH1">{popupContent[1]}</h1>
+                <h1 className="popupH2">{popupContent[2]}</h1>
+              </div>
             </div>
+            ) : (<div className="popupResultX">
+            <h1 className="instructionH1">{popupContent[0]}</h1>
+            <li className="instruction">{popupContent[1]}</li>
+            <li className="instruction">{popupContent[2]}</li>
+            <li className="instruction">{popupContent[3]}</li>
+            <li className="instruction">{popupContent[4]}</li>
+            <li className="instruction">{popupContent[5]}</li>
+          </div>)}
           </Popup>
         </div>
+        <Footer className="footer"/>
     </div>
   );
 }

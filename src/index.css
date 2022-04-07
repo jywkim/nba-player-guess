@@ -9,7 +9,8 @@
 
 .cellLong {
   width: 3in;
-  font-weight: bold;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .cellSingle {
@@ -32,8 +33,19 @@
   width: 100%;
 }
 
+.divPlayerName {
+  width: 3in;
+}
+
 .dirVal {
   position: relative;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .green {
@@ -41,8 +53,30 @@
   color: #fff;
 }
 
+.headerLong {
+  width: 3.5in;
+}
+
 .highlight {
   background-color: grey !important;
+}
+
+.input {
+  font-size: 18px;
+  font-weight: 500;
+  padding: 20px;
+}
+
+.instructionsButton {
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.instructionH1 {
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .popup {
@@ -88,6 +122,17 @@
   color: #fff;
 }
 
+.silhouette {
+  filter: contrast(0%) brightness(0%);
+}
+
+.silhouetteButton {
+  border: none;
+  background: transparent;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
 .suggestion {
   cursor: pointer;
   border-right: 1px solid black;
@@ -108,8 +153,8 @@
 
 tbody {
   display: block;
-  max-height: 60vh;
-  overflow: auto;
+  max-height: 50vh;
+  overflow-y: auto;
 }
 
 thead, tbody tr {

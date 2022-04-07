@@ -13,7 +13,7 @@ export const Players = ({players}) => {
         return(
               <tr key = {index}>
                   <td className={"cellSingle cellLong " + (player.nameStatus)}>
-                    <div>
+                    <div className="divPlayerName">
                       {player.name}
                     </div>
                   </td>
@@ -75,7 +75,7 @@ export const Players = ({players}) => {
 
       const tableHeader = <thead className="classHeader">
                             <tr className="rowHeader">
-                                <th className="cellHeader cellLong"></th>
+                                <th className="cellHeader headerLong"></th>
                                 <th className="cellHeader cellSmall">TEAM</th>
                                 <th className="cellHeader cellSmall">CONF</th>
                                 <th className="cellHeader cellSmall">DIV</th>
