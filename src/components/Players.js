@@ -1,6 +1,14 @@
-import React from 'react'
+import React, { useEffect } from "react";
 
 export const Players = ({players}) => {
+  useEffect(() => {
+    const scrollToBottom = async () => {
+      var element = document.getElementById("tableBody");
+      element.scrollTop = element.scrollHeight;
+    }
+    scrollToBottom();
+  }, [players]);
+
     const PlayerRow = (player,index) => {
         return(
               <tr key = {index}>
@@ -67,21 +75,21 @@ export const Players = ({players}) => {
 
       const tableHeader = <thead className="classHeader">
                             <tr className="rowHeader">
-                                <th className="cellHeader"></th>
-                                <th className="cellHeader">TEAM</th>
-                                <th className="cellHeader">CONF</th>
-                                <th className="cellHeader">DIV</th>
-                                <th className="cellHeader">POS</th>
-                                <th className="cellHeader">HT</th>
-                                <th className="cellHeader">AGE</th>
-                                <th className="cellHeader">#</th>
+                                <th className="cellHeader cellLong"></th>
+                                <th className="cellHeader cellSmall">TEAM</th>
+                                <th className="cellHeader cellSmall">CONF</th>
+                                <th className="cellHeader cellSmall">DIV</th>
+                                <th className="cellHeader cellSmall">POS</th>
+                                <th className="cellHeader cellSmall">HT</th>
+                                <th className="cellHeader cellSmall">AGE</th>
+                                <th className="cellHeader cellSmall">#</th>
                             </tr>
                         </thead>
     
     return (
         <table>
             {tableHeader}
-            <tbody>
+            <tbody id="tableBody">
                 {PlayerTable}
             </tbody>
         </table>
