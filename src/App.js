@@ -145,8 +145,8 @@ export default function App() {
 
   const checkTeam = (selectedPlayer, randomPlayer) => {
     if (selectedPlayer.team === randomPlayer.team) return "green";
-    let selectedPlayerTeams = selectedPlayer.teams.map(t => t.teamId);
-    if (selectedPlayerTeams.includes(randomPlayer.teamId)) return "yellow";
+    let randomPlayerTeams = randomPlayer.teams.map(t => t.teamId);
+    if (randomPlayerTeams.includes(selectedPlayer.teamId)) return "yellow";
   }
 
   const checkWithinTwo = (selected, random) => {
@@ -159,12 +159,13 @@ export default function App() {
     let team = teamRes.data.league.standard.find(t => t.teamId === playerRes.teamId);
     let teamId = playerRes.teamId;
     let teams = playerRes.teams;
+    let div = shortenDivision(team.divName);
     let pos = playerRes.pos;
     let heightFt = playerRes.heightFeet;
     let heightIn = playerRes.heightInches;
     let age = getAge(playerRes.dateOfBirthUTC);
     let jersey = playerRes.jersey;
-    let playerObject = {name: name, personId: personId, team: team.tricode, teamId: teamId, teams: teams, conf: team.confName, div: team.divName, pos: pos, heightFt: heightFt, heightIn: heightIn, age: age, jersey: jersey};
+    let playerObject = {name: name, personId: personId, team: team.tricode, teamId: teamId, teams: teams, conf: team.confName, div: div, pos: pos, heightFt: heightFt, heightIn: heightIn, age: age, jersey: jersey};
     return playerObject;
   }
 
@@ -249,6 +250,33 @@ export default function App() {
     }
   }
 
+  const shortenDivision = (division) => {
+    let short = "";
+    switch(division) {
+      case "Atlantic":
+        short = "Atl";
+        break;
+      case "Central":
+        short = "Cen";
+        break;
+      case "Southeast":
+        short = "SE";
+        break;
+      case "Northwest":
+        short = "NW";
+        break;
+      case "Pacific":
+        short = "Pac";
+        break;
+      case "Southwest":
+        short = "SW";
+        break;
+      default:
+        short = division;
+      }
+      return short;
+    }
+
   const showInstructions = () => {
     setInstructions(true);
     setSilhouette(false);
@@ -266,7 +294,7 @@ export default function App() {
   const showSilhouette = () => {
     setSilhouette(true);
     setInstructions(false);
-    setPopupContent(["Who is this", "MYSTERY PLAYER?", ""]);
+    setPopupContent(["Who's that", "PLAYER?", ""]);
     setPopupDisplay(true);
   }
 

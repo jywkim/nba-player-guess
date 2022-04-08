@@ -20,10 +20,6 @@
   text-align: center;
 }
 
-.cellSmall {
-  width: 1in;
-}
-
 .containersContainer {
   position: relative;
 }
@@ -31,14 +27,6 @@
 .dirArrow {
   position: absolute;
   width: 100%;
-}
-
-.divPlayerName {
-  width: 3in;
-}
-
-.dirVal {
-  position: relative;
 }
 
 .footer {
@@ -54,7 +42,7 @@
 }
 
 .headerLong {
-  width: 3.5in;
+  width: 3in;
 }
 
 .highlight {
@@ -97,7 +85,8 @@
   padding: 32px;
   width: 100%;
   max-width: 450px;
-  background-color: white;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgb(0 0 0 / 25%);
 }
 
 .popup-inner .close-btn {
@@ -159,6 +148,8 @@ tbody {
 
 thead, tbody tr {
   display: table;
+  width: 100%;
+  table-layout: fixed;
 }
 
 .yellow {
