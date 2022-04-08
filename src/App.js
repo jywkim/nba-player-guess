@@ -281,7 +281,7 @@ export default function App() {
     setInstructions(true);
     setSilhouette(false);
     setPopupContent(
-      ["Guess the mystery player!", 
+      ["Guess the NBA player!", 
       "You have 8 guesses", 
       "Green in any column = Match",
       "Yellow in TEAM column = Player's old team'",
@@ -294,13 +294,13 @@ export default function App() {
   const showSilhouette = () => {
     setSilhouette(true);
     setInstructions(false);
-    setPopupContent(["Who's that", "PLAYER?", ""]);
+    setPopupContent(["Do you know", "THIS PLAYER?", ""]);
     setPopupDisplay(true);
   }
 
   return (
     <div className="container" align="center">
-        <Header className="header" instructions={showInstructions}/>
+        <Header className="header" instructions={showInstructions} silhouette={showSilhouette}/>
         <br/>
         <div className="col-lg-10">
           <h1 className="titleH1">NBA Player Guessing Game</h1>
@@ -336,11 +336,6 @@ export default function App() {
             </div>
           </form>
           <br/>
-          <div className="silhouetteDiv">
-            <button className="silhouetteButton"
-              onClick={showSilhouette}
-            >SHOW SILHOUETTE</button>
-          </div>
           <br/>
           {submit && guesses && (
             <div className="playersContainer">
@@ -365,11 +360,13 @@ export default function App() {
             </div>
             ) : (<div className="popupResultX">
             <h1 className="instructionH1">{popupContent[0]}</h1>
-            <li className="instruction">{popupContent[1]}</li>
-            <li className="instruction">{popupContent[2]}</li>
-            <li className="instruction">{popupContent[3]}</li>
-            <li className="instruction">{popupContent[4]}</li>
-            <li className="instruction">{popupContent[5]}</li>
+            <ul>
+              <li className="instruction"><i class="fa-solid fa-basketball fa-2xs"></i> {popupContent[1]}</li>
+              <li className="instruction"><i class="fa-solid fa-basketball fa-2xs"></i> {popupContent[2]}</li>
+              <li className="instruction"><i class="fa-solid fa-basketball fa-2xs"></i> {popupContent[3]}</li>
+              <li className="instruction"><i class="fa-solid fa-basketball fa-2xs"></i> {popupContent[4]}</li>
+              <li className="instruction"><i class="fa-solid fa-basketball fa-2xs"></i> {popupContent[5]}</li>
+            </ul>
           </div>)}
           </Popup>
         </div>

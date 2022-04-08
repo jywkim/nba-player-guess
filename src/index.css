@@ -1,3 +1,14 @@
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+.buttonHeader {
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: bold;
+}
+
 .cellDirection {
   position: relative;
 }
@@ -10,7 +21,7 @@
 .cellLong {
   width: 3in;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: bold;
 }
 
 .cellSingle {
@@ -51,15 +62,8 @@
 
 .input {
   font-size: 18px;
-  font-weight: 500;
+  font-weight: bold;
   padding: 20px;
-}
-
-.instructionsButton {
-  border: none;
-  background: transparent;
-  font-size: 14px;
-  font-weight: 500;
 }
 
 .instructionH1 {
@@ -115,13 +119,6 @@
   filter: contrast(0%) brightness(0%);
 }
 
-.silhouetteButton {
-  border: none;
-  background: transparent;
-  font-weight: 500;
-  text-decoration: underline;
-}
-
 .suggestion {
   cursor: pointer;
   border-right: 1px solid black;
@@ -152,6 +149,25 @@ thead, tbody tr {
   table-layout: fixed;
 }
 
+.titleH1 {
+  font-weight: bold;
+}
+
 .yellow {
   background-color: #f4e878;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding-left: 1.3em;
+}
+
+li:before {
+  display: inline-block;
+  margin-left: -1.3em; 
+  width: 1.3em; 
 }
