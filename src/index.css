@@ -87,8 +87,7 @@
 .popup-inner {
   position: relative;
   padding: 32px;
-  width: 100%;
-  max-width: 450px;
+  min-width: 450px;
   background-color: #fff;
   box-shadow: 0 0 20px rgb(0 0 0 / 25%);
 }
@@ -155,6 +154,11 @@ thead, tbody tr {
 
 .yellow {
   background-color: #f4e878;
+}
+
+ul li {
+  margin: 15px 0;
+  line-height: 20px;
 }
 
 ul {

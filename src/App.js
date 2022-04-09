@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
 import axios from 'axios';
-import { Players } from './components/Players';
-import Popup from './components/Popup';
 import {Header} from './components/Header';
 import {Footer} from './components/Footer';
+import {Form} from './components/Form';
+import {Instructions} from './components/Instructions';
+import { Players } from './components/Players';
+import Popup from './components/Popup';
+import {Silhouette} from './components/Silhouette';
 
 export default function App() {
   const [counter, setCounter] = useState(1);
@@ -281,12 +284,10 @@ export default function App() {
     setInstructions(true);
     setSilhouette(false);
     setPopupContent(
-      ["Guess the NBA player!", 
-      "You have 8 guesses", 
-      "Green in any column = Match",
-      "Yellow in TEAM column = Player's old team'",
-      "Yellow in POS column = Partial match",
-      "Yellow in other columns = Within 2 (inches, years, numbers)"
+      ["Green in any column = Match",
+      "Yellow in TEAM column = Player's old team",
+      "Yellow in POS column = Position is a partial match",
+      "Yellow in HT, AGE, # columns = Within 2 (inches, years, numbers)"
     ]);
     setPopupDisplay(true);
   }
@@ -303,38 +304,21 @@ export default function App() {
         <Header className="header" instructions={showInstructions} silhouette={showSilhouette}/>
         <br/>
         <div className="col-lg-10">
-          <h1 className="titleH1">NBA Player Guessing Game</h1>
+          <h1 className="titleH1">NBA Wordle</h1>
           <br/>
-          <form
-            id="formPlayer"
-            onSubmit={handleSubmit}
-            autoComplete="off">
-            <div className="containersContainer">
-              <div className="inputContainer">
-                <input
-                  className="col-md-6 input"
-                  name="playerName"
-                  type="text"
-                  value={player.name}
-                  onChange={handleChange}
-                  placeholder={placeholder}
-                  onBlur={handleBlur}
-                  onKeyDown={handleKeyDown}
-                  disabled={disabled}
-                >
-                </input>
-              </div>
-              <div className="suggestionContainer">
-                {suggestions && suggestions.map((suggestion, i) =>
-                  <div key={i}
-                      id={i}
-                      className={"suggestion col-md-6 justify-content-md-center " + (cursor === i ? "highlight" : null)}
-                      onMouseDown={() => handleMouseDown(suggestion, i)}
-                  >{suggestion.firstName} {suggestion.lastName}</div>
-                )}
-              </div>
-            </div>
-          </form>
+          <Form 
+            className="form" 
+            handleSubmit = {handleSubmit}
+            player = {player}
+            handleChange = {handleChange}
+            placeholder = {placeholder}
+            handleBlur = {handleBlur}
+            handleKeyDown = {handleKeyDown}
+            disabled = {disabled}
+            suggestions = {suggestions}
+            cursor = {cursor}
+            handleMouseDown = {handleMouseDown}
+          />
           <br/>
           <br/>
           {submit && guesses && (
@@ -345,29 +329,15 @@ export default function App() {
 
           <Popup trigger={popupDisplay} setTrigger={setPopupDisplay}>
             {!instructions ? (
-            <div>
-              <img 
-                src={urlPlayerPic} 
-                alt="Mystery Player"
-                className={silhouette ? "silhouette" : ""}
-              ></img>
-              <br/><br/>
-              <div className="popupResult">
-                <h1 className="popupH2">{popupContent[0]}</h1>
-                <h1 className="popupH1">{popupContent[1]}</h1>
-                <h1 className="popupH2">{popupContent[2]}</h1>
-              </div>
-            </div>
-            ) : (<div className="popupResultX">
-            <h1 className="instructionH1">{popupContent[0]}</h1>
-            <ul>
-              <li className="instruction"><i class="fa-solid fa-basketball fa-2xs"></i> {popupContent[1]}</li>
-              <li className="instruction"><i class="fa-solid fa-basketball fa-2xs"></i> {popupContent[2]}</li>
-              <li className="instruction"><i class="fa-solid fa-basketball fa-2xs"></i> {popupContent[3]}</li>
-              <li className="instruction"><i class="fa-solid fa-basketball fa-2xs"></i> {popupContent[4]}</li>
-              <li className="instruction"><i class="fa-solid fa-basketball fa-2xs"></i> {popupContent[5]}</li>
-            </ul>
-          </div>)}
+            <Silhouette 
+              className="silhouette" 
+              urlPlayerPic={urlPlayerPic} 
+              silhouette={silhouette} 
+              popupContent={popupContent} 
+            />
+            ) : (
+            <Instructions className="instructions" popupContent={popupContent}/>
+            )}
           </Popup>
         </div>
         <Footer className="footer"/>
