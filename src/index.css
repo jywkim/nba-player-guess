@@ -52,12 +52,20 @@
   color: #fff;
 }
 
+.headerHead {
+  border-bottom-style: solid;
+}
+
 .headerLong {
   width: 3in;
 }
 
 .highlight {
   background-color: grey !important;
+}
+
+.pointerEvents {
+  pointer-events: none;
 }
 
 .input {
@@ -126,9 +134,9 @@
   background-color: #fff;
 }
 
-.suggestion:hover {
+/* .suggestion:hover {
   background-color: grey;
-}
+} */
 
 .suggestionContainer {
   z-index: 5;

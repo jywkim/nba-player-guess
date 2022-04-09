@@ -29,37 +29,36 @@ export default function App() {
   const urlTeams = "https://data.nba.net/data/10s/prod/v1/2021/teams.json";
 
   useEffect(() => {
-    const getRandomPlayer = async () => {
-      const resPlayers = await axios.get(urlPlayers);
-      let playerIds = resPlayers.data.league.standard.map(p => p.personId);
-      let randomPlayerId = playerIds[Math.floor(Math.random() * playerIds.length)];
-      let randomPlayer = resPlayers.data.league.standard.find(p => p.personId === randomPlayerId);
-      console.log(randomPlayer);
-      axios.get(urlTeams)
-        .then(async res => {
+    const initializePlayers = async () => {
+      await axios.get(urlPlayers)
+      .then(async resPlayers => {
+        let activePlayers = resPlayers.data.league.standard.filter(p => p.isActive === true);
+        console.log(activePlayers);
+        setPlayers(activePlayers);
+        let playerIds = activePlayers.map(p => p.personId);
+        let randomPlayerId = playerIds[Math.floor(Math.random() * playerIds.length)];
+        let randomPlayer = activePlayers.find(p => p.personId === randomPlayerId);
+        console.log(randomPlayer);
+        await axios.get(urlTeams)
+        .then(async resTeams => {
           let name = randomPlayer.firstName + ' ' + randomPlayer.lastName;
-          let randomPlayerObj = createPlayerObject(name, randomPlayer, res);
+          let randomPlayerObj = createPlayerObject(name, randomPlayer, resTeams);
           setRandomPlayer(randomPlayerObj);
         }).catch(err => {
           console.log(err);
         })
+      }).catch(err => {
+        console.log(err);
+      })
     }
-    const loadPlayers = async () => {
-      const response = await axios.get(urlPlayers);
-      console.log(response.data.league.standard);
-      setPlayers(response.data.league.standard);
-    }
-    getRandomPlayer();
-    loadPlayers();
+    initializePlayers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const changePlaceholder = (selectedPlayer) => {
-    if (selectedPlayer.personId === randomPlayer.personId) {
-      return "You solved it in " + counter + "!";
-    } else {
-      return counter < 8 ? "Guess " + (counter + 1) + " of 8" : "Game Over";
-    }
+    return (selectedPlayer.personId === randomPlayer.personId) ? 
+           "You solved it in " + counter + "!" :
+           counter < 8 ? "Guess " + (counter + 1) + " of 8" : "Game Over";
   }
 
   const changePlayerStatus = (player, name, team, conf, div, pos, height, age, jersey) => {
@@ -246,6 +245,10 @@ export default function App() {
     setSubmit(true);
   }
 
+  const handleMouseOver = (i) => {
+    setCursor(i);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (e.target[0].value.length !== 0) {
@@ -318,6 +321,7 @@ export default function App() {
             suggestions = {suggestions}
             cursor = {cursor}
             handleMouseDown = {handleMouseDown}
+            handleMouseOver = {handleMouseOver}
           />
           <br/>
           <br/>

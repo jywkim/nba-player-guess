@@ -11,6 +11,7 @@ export const Form = (props) => {
     const suggestions = props.suggestions;
     const cursor = props.cursor;
     const handleMouseDown = props.handleMouseDown;
+    const handleMouseOver = props.handleMouseOver;
 
     return (
           <form
@@ -38,6 +39,7 @@ export const Form = (props) => {
                       id={i}
                       className={"suggestion col-md-6 justify-content-md-center " + (cursor === i ? "highlight" : null)}
                       onMouseDown={() => handleMouseDown(suggestion, i)}
+                      onMouseOver={() => handleMouseOver(i)}
                   >{suggestion.firstName} {suggestion.lastName}</div>
                 )}
               </div>

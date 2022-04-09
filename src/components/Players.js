@@ -70,10 +70,10 @@ export const Players = ({players}) => {
                   <td className={"cellSingle " + (player.jerseyStatus)}>
                     <div className="cellDirection">
                       <div className="cellValue">
-                      {player.jersey}
+                        {player.jersey}
                       </div>
                       <div className="dirArrow">
-                      {player.jerseyDirection}
+                        {player.jerseyDirection}
                       </div>
                     </div>
                   </td>
@@ -83,8 +83,8 @@ export const Players = ({players}) => {
 
       const PlayerTable = players.map((play, index) => PlayerRow(play, index))
 
-      const tableHeader = <thead className="classHeader">
-                            <tr className="rowHeader">
+      const tableHeader = <thead className="headerHead">
+                            <tr className="headerRow">
                                 <th className="cellHeader headerLong"></th>
                                 <th className="cellHeader">TEAM</th>
                                 <th className="cellHeader">CONF</th>
