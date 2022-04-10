@@ -19,35 +19,35 @@ export const Players = ({players}) => {
                       </div>
                     </div>
                   </td>
-                  <td className={"cellSingle " + (player.teamStatus)}>
+                  <td className={"cellSingle cellShort " + (player.teamStatus)}>
                     <div>
                       <div className="cellValue">
                         {player.team}
                       </div>
                     </div>
                   </td>
-                  <td className={"cellSingle " + (player.confStatus)}>
+                  <td className={"cellSingle cellShort " + (player.confStatus)}>
                     <div>
                       <div className="cellValue">
                         {player.conf}
                       </div>
                     </div>
                   </td>
-                  <td className={"cellSingle " + (player.divStatus)}>
+                  <td className={"cellSingle cellShort " + (player.divStatus)}>
                     <div>
                       <div className="cellValue">
                         {player.div}
                       </div>
                     </div>                    
                   </td>
-                  <td className={"cellSingle " + (player.posStatus)}>
+                  <td className={"cellSingle cellShort " + (player.posStatus)}>
                     <div>
                       <div className="cellValue">
                         {player.pos}
                       </div>
                     </div>                    
                   </td>
-                  <td className={"cellSingle " + (player.heightStatus)}>
+                  <td className={"cellSingle cellShort " + (player.heightStatus)}>
                     <div className="cellDirection">
                       <div className="cellValue">
                         {player.heightFt + "'" + player.heightIn + '"'}
@@ -57,7 +57,7 @@ export const Players = ({players}) => {
                       </div>
                     </div>
                   </td>
-                  <td className={"cellSingle " + (player.ageStatus)}>
+                  <td className={"cellSingle cellShort " + (player.ageStatus)}>
                     <div className="cellDirection">
                       <div className="cellValue">
                         {player.age}
@@ -67,7 +67,7 @@ export const Players = ({players}) => {
                       </div>
                     </div>
                   </td>
-                  <td className={"cellSingle " + (player.jerseyStatus)}>
+                  <td className={"cellSingle cellShort " + (player.jerseyStatus)}>
                     <div className="cellDirection">
                       <div className="cellValue">
                         {player.jersey}

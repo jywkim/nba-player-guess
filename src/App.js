@@ -84,7 +84,7 @@ export default function App() {
     if (counter === 8 && selectedPlayer.personId !== randomPlayer.personId) {
       setDisabled(true);
       statusPlayer.final = true;
-      setPopupContent(["Sorry, the correct answer is", randomPlayer.name.toUpperCase(), "Please try again!"]);
+      setPopupContent(["Sorry, the correct answer is", randomPlayer.name, "Please try again!"]);
       setPopupDisplay(true);
     }
 

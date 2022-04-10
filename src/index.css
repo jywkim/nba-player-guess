@@ -24,10 +24,13 @@
   font-weight: bold;
 }
 
+.cellShort {
+  height: 1in;
+}
+
 .cellSingle {
   background-color: #edeae5;
   border: 1px solid #FFFFFF;
-  height: 1in;
   text-align: center;
 }
 
@@ -45,6 +48,7 @@
   bottom: 0;
   left: 0;
   right: 0;
+  background-color: #fff;
 }
 
 .green {
@@ -52,8 +56,12 @@
   color: #fff;
 }
 
+.header {
+  background-color: #fff;
+}
+
 .headerHead {
-  border-bottom-style: solid;
+  border-bottom: 2px solid;
 }
 
 .headerLong {
@@ -134,10 +142,6 @@
   background-color: #fff;
 }
 
-/* .suggestion:hover {
-  background-color: grey;
-} */
-
 .suggestionContainer {
   z-index: 5;
   position: absolute;
@@ -182,4 +186,22 @@ li:before {
   display: inline-block;
   margin-left: -1.3em; 
   width: 1.3em; 
+}
+
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+	.cellLong { 
+    display: table-caption;
+    width: 100%;
+	}
+
+  .cellShort {
+    height: 0.8in;
+  }
+
+  .headerLong {
+    display: none;
+  }
 }
