@@ -87,6 +87,14 @@
   font-weight: bold;
 }
 
+.instructionList {
+  text-align: left;
+}
+
+.playerPic {
+  width: 350px;
+}
+
 .popup {
   position: fixed;
   top: 0;
@@ -103,7 +111,8 @@
 .popup-inner {
   position: relative;
   padding: 32px;
-  min-width: 450px;
+  width: calc(100vw - 40px);
+  max-width: 500px;
   background-color: #fff;
   box-shadow: 0 0 20px rgb(0 0 0 / 25%);
 }
@@ -203,5 +212,9 @@ only screen and (max-width: 760px),
 
   .headerLong {
     display: none;
+  }
+
+  .playerPic {
+    width: 280px;
   }
 }

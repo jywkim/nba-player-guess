@@ -287,10 +287,10 @@ export default function App() {
     setInstructions(true);
     setSilhouette(false);
     setPopupContent(
-      ["Green in any column = Match",
-      "Yellow in TEAM column = Player's old team",
-      "Yellow in POS column = Position is a partial match",
-      "Yellow in HT, AGE, # columns = Within 2 (inches, years, numbers)"
+      ["Green in any column is a match",
+      "Yellow in TEAM column is player's old team",
+      "Yellow in POS column is a partial match (e.g. G and G-F)",
+      "Yellow in HT, AGE, # columns is within 2 (inches, years, numbers)"
     ]);
     setPopupDisplay(true);
   }
