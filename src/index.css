@@ -2,6 +2,15 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.appHeader {
+  width: max-content;
+}
+
+.appLogo {
+  height: 35px;
+  float: left;
+}
+
 .buttonHeader {
   border: none;
   background: transparent;
@@ -26,12 +35,18 @@
 
 .cellShort {
   height: 1in;
+  font-size: 1em;
 }
 
 .cellSingle {
   background-color: #edeae5;
   border: 1px solid #FFFFFF;
   text-align: center;
+}
+
+.close-btn {
+  background-color: transparent;
+  font-weight: bold;
 }
 
 .containersContainer {
@@ -72,10 +87,6 @@
   background-color: grey !important;
 }
 
-.pointerEvents {
-  pointer-events: none;
-}
-
 .input {
   font-size: 18px;
   font-weight: bold;
@@ -93,6 +104,11 @@
 
 .playerPic {
   width: 350px;
+}
+
+.playerTeamLogo {
+  width: 40px;
+  height: 40px;
 }
 
 .popup {
@@ -171,6 +187,10 @@ thead, tbody tr {
 
 .titleH1 {
   font-weight: bold;
+  position: relative;
+  float:left;
+  top: -6px;
+  margin: 0;
 }
 
 .yellow {
@@ -193,21 +213,23 @@ li {
 
 li:before {
   display: inline-block;
-  margin-left: -1.3em; 
-  width: 1.3em; 
+  margin-left: -1.3em;
+  width: 1.3em;
 }
 
-@media 
+@media
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
 
-	.cellLong { 
+	.cellLong {
     display: table-caption;
     width: 100%;
+    line-height: 2;
 	}
 
   .cellShort {
     height: 0.8in;
+    font-size: 0.9em;
   }
 
   .headerLong {

@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# NBA Wordle
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Inspired by [Poeltl](https://poeltl.dunk.town/).
 
 ## Available Scripts
 

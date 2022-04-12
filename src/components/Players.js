@@ -10,6 +10,8 @@ export const Players = ({players}) => {
   }, [players]);
 
     const PlayerRow = (player,index) => {
+        let playerPicUrl = "https://cdn.nba.com/logos/nba/" + player.teamId + "/primary/L/logo.svg";
+
         return(
               <tr key = {index}>
                   <td className={"cellSingle cellLong " + (player.nameStatus)}>
@@ -21,6 +23,9 @@ export const Players = ({players}) => {
                   </td>
                   <td className={"cellSingle cellShort " + (player.teamStatus)}>
                     <div>
+                      <div>
+                        <img className="playerTeamLogo" src={playerPicUrl}></img>
+                      </div>
                       <div className="cellValue">
                         {player.team}
                       </div>

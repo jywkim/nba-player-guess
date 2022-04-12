@@ -33,7 +33,6 @@ export default function App() {
       await axios.get(urlPlayers)
       .then(async resPlayers => {
         let activePlayers = resPlayers.data.league.standard.filter(p => p.isActive === true);
-        console.log(activePlayers);
         setPlayers(activePlayers);
         let playerIds = activePlayers.map(p => p.personId);
         let randomPlayerId = playerIds[Math.floor(Math.random() * playerIds.length)];
@@ -212,15 +211,16 @@ export default function App() {
  const handleChange = (e) => {
     setCursor(0);
     let text = e.target.value;
+    let replaceText = text.replace(/([.?*+^$[\]\\(){}|-])/g, '');
     let matches = [];
     if (text.length > 0) {
       matches = players.filter(player => {
-        const regex = new RegExp(`${text}`, "gi");
+        const regex = new RegExp(`${replaceText}`, "gi");
         let playerFullName = player.firstName + ' ' + player.lastName;
         return playerFullName.match(regex);
       });
     }
-    setSuggestions(matches);
+    setSuggestions(matches.slice(0, 5));
     setPlayer({name: text});
   }
 
@@ -298,7 +298,7 @@ export default function App() {
   const showSilhouette = () => {
     setSilhouette(true);
     setInstructions(false);
-    setPopupContent(["Do you know", "THIS PLAYER?", ""]);
+    setPopupContent(["Do you know", "this player?", ""]);
     setPopupDisplay(true);
   }
 
@@ -307,7 +307,12 @@ export default function App() {
         <Header className="header" instructions={showInstructions} silhouette={showSilhouette}/>
         <br/>
         <div className="col-lg-10">
-          <h1 className="titleH1">NBA Wordle</h1>
+          <div className="appHeader">
+            <img className="appLogo" src="/nba-logo.png" alt="NBA Logo"></img>
+            <h1 className="titleH1">NBA Wordle</h1>
+          </div>
+          <br/>
+          <br/>
           <br/>
           <Form 
             className="form" 
