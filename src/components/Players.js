@@ -24,7 +24,7 @@ export const Players = ({players}) => {
                   <td className={"cellSingle cellShort " + (player.teamStatus)}>
                     <div>
                       <div>
-                        <img className="playerTeamLogo" src={playerPicUrl}></img>
+                        <img className="playerTeamLogo" src={playerPicUrl} alt="Team Logo"></img>
                       </div>
                       <div className="cellValue">
                         {player.team}
