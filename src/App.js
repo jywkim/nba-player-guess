@@ -320,7 +320,7 @@ export default function App() {
             player = {player}
             handleChange = {handleChange}
             placeholder = {placeholder}
-            // handleBlur = {handleBlur}
+            handleBlur = {handleBlur}
             handleKeyDown = {handleKeyDown}
             disabled = {disabled}
             suggestions = {suggestions}
