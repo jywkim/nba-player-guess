@@ -308,7 +308,7 @@ export default function App() {
         <br/>
         <div className="col-lg-10">
           <div className="appHeader">
-            <img className="appLogo" src="/nba-logo.png" alt="NBA Logo"></img>
+            <i className="fa-solid fa-basketball fa-2x appLogo"></i>
             <h1 className="titleH1">NBA Wordle</h1>
           </div>
           <br/>

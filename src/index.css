@@ -7,8 +7,8 @@
 }
 
 .appLogo {
-  height: 35px;
   float: left;
+  padding-right: 5px;
 }
 
 .buttonHeader {
@@ -84,7 +84,7 @@
 }
 
 .highlight {
-  background-color: grey !important;
+  background-color: #A0A0A0 !important;
 }
 
 .input {
