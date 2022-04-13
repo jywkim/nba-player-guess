@@ -21,7 +21,7 @@ export default function App() {
   const [popupContent, setPopupContent] = useState([]);
   const [popupDisplay, setPopupDisplay] = useState(false);
   const [randomPlayer, setRandomPlayer] = useState({ name: "", personId: "", team: "", teamId: "", teams: [], conf: "", div: "", pos: "", heightFt: "", heightIn: "", age: "", jersey: "" })
-  const [silhouette, setSilhouette] = useState(false);
+  const [silhouette, setSilhouette] = useState(true);
   const [submit, setSubmit] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
   const urlPlayerPic = "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/" + randomPlayer.personId + ".png"
@@ -76,6 +76,7 @@ export default function App() {
     let statusPlayer = selectedPlayer;
     if (selectedPlayer.personId === randomPlayer.personId) {
       setDisabled(true);
+      setSilhouette(false);
       statusPlayer.nameStatus = "green";
       setPopupContent(["Match!", randomPlayer.name.toUpperCase(), "You solved it in " + (counter) + (counter === 1 ? " guess" : " guesses")]);
       setPopupDisplay(true);
@@ -232,7 +233,6 @@ export default function App() {
     } else if (e.keyCode === 13) {
       let name = suggestions[cursor] ? (suggestions[cursor].firstName + " " + suggestions[cursor].lastName) : "";
       if (name.length) {
-        setSilhouette(false);
         setInstructions(false);
         enterPlayer(name, suggestions, cursor);
       }
