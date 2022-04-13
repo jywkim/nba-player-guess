@@ -1,6 +1,8 @@
 # NBA Wordle
 
-An NBA player guessing game inspired by [Poeltl](https://poeltl.dunk.town/).
+An NBA player guessing game built in React, inspired by [Poeltl](https://poeltl.dunk.town/).
+
+Play the game [here](https://jywkim.github.io/nba-player-guess/)!
 
 ## Rules
 
