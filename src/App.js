@@ -307,7 +307,7 @@ export default function App() {
     <div className="container" align="center">
         <Header className="header" instructions={showInstructions} silhouette={showSilhouette}/>
         <br/>
-        <div className="col-lg-10">
+        <div className="col-lg-10 main">
           <div className="appHeader">
             <i className="fa-solid fa-basketball fa-2x appLogo"></i>
             <h1 className="titleH1">NBA Wordle</h1>
