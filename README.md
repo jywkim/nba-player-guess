@@ -4,6 +4,8 @@ An NBA player guessing game built in React, inspired by [Poeltl](https://poeltl.
 
 Play the game [here](https://jywkim.github.io/nba-player-guess/)!
 
+![Screenshot](/public/screenshot.png)
+
 ## Rules
 
 Green in any column is a match
