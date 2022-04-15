@@ -307,10 +307,10 @@ export default function App() {
     <div className="container" align="center">
         <Header className="header" instructions={showInstructions} silhouette={showSilhouette}/>
         <br/>
-        <div className="col-lg-10 main">
+        <div className="col-lg-10 appMain">
           <div className="appHeader">
             <i className="fa-solid fa-basketball fa-2x appLogo"></i>
-            <h1 className="titleH1">NBA Wordle</h1>
+            <h1 className="appTitleH1">NBA Wordle</h1>
           </div>
           <br/>
           <br/>
@@ -340,13 +340,12 @@ export default function App() {
           <Popup trigger={popupDisplay} setTrigger={setPopupDisplay}>
             {!instructions ? (
             <Silhouette 
-              className="silhouette" 
               urlPlayerPic={urlPlayerPic} 
               silhouette={silhouette} 
               popupContent={popupContent} 
             />
             ) : (
-            <Instructions className="instructions" popupContent={popupContent}/>
+            <Instructions popupContent={popupContent}/>
             )}
           </Popup>
         </div>

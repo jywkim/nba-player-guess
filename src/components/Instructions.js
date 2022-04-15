@@ -9,7 +9,7 @@ export const Instructions = (props) => {
         <div className="instructionList">
           <ul>
             {popupContent.map(function(p, index){
-              return (<li key={index}className="instruction"><i className="fa-solid fa-basketball fa-2xs"></i> {p}</li>)
+              return (<li key={index} className="instruction"><i className="fa-solid fa-basketball fa-2xs"></i> {p}</li>)
             })}
           </ul>
         </div>

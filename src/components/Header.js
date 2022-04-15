@@ -12,7 +12,7 @@ export const Header = (props) => {
     return (
         <div className="header">
             <button 
-                className="buttonHeader" 
+                className="headerButton" 
                 onClick={showInstructions}>HOW TO PLAY
             </button>
 
@@ -21,7 +21,7 @@ export const Header = (props) => {
             &nbsp;
 
             <button 
-                className="buttonHeader"
+                className="headerButton"
                 onClick={showSilhouette}>SHOW SILHOUETTE
             </button>
         </div>

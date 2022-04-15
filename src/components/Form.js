@@ -15,11 +15,10 @@ export const Form = (props) => {
 
     return (
           <form
-            id="formPlayer"
             onSubmit={handleSubmit}
             autoComplete="off">
-            <div className="containersContainer">
-              <div className="inputContainer">
+            <div className="formContainer">
+              <div>
                 <input
                   className="col-md-6 input"
                   name="playerName"

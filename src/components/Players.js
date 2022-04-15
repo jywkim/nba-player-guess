@@ -14,70 +14,70 @@ export const Players = ({players}) => {
 
         return(
               <tr key = {index}>
-                  <td className={"cellSingle cellLong " + (player.nameStatus)}>
+                  <td className={"cell cellLong " + (player.nameStatus)}>
                     <div>
                       <div className="cellValue">
                         {player.name}
                       </div>
                     </div>
                   </td>
-                  <td className={"cellSingle cellShort " + (player.teamStatus)}>
+                  <td className={"cell cellShort " + (player.teamStatus)}>
                     <div>
                       <div>
-                        <img className="playerTeamLogo" src={playerPicUrl} alt="Team Logo"></img>
+                        <img className="cellTeamLogo" src={playerPicUrl} alt="Team Logo"></img>
                       </div>
                       <div className="cellValue">
                         {player.team}
                       </div>
                     </div>
                   </td>
-                  <td className={"cellSingle cellShort " + (player.confStatus)}>
+                  <td className={"cell cellShort " + (player.confStatus)}>
                     <div>
                       <div className="cellValue">
                         {player.conf}
                       </div>
                     </div>
                   </td>
-                  <td className={"cellSingle cellShort " + (player.divStatus)}>
+                  <td className={"cell cellShort " + (player.divStatus)}>
                     <div>
                       <div className="cellValue">
                         {player.div}
                       </div>
                     </div>                    
                   </td>
-                  <td className={"cellSingle cellShort " + (player.posStatus)}>
+                  <td className={"cell cellShort " + (player.posStatus)}>
                     <div>
                       <div className="cellValue">
                         {player.pos}
                       </div>
                     </div>                    
                   </td>
-                  <td className={"cellSingle cellShort " + (player.heightStatus)}>
+                  <td className={"cell cellShort " + (player.heightStatus)}>
                     <div className="cellDirection">
                       <div className="cellValue">
                         {player.heightFt + "'" + player.heightIn + '"'}
                       </div>
-                      <div className="dirArrow">
+                      <div className="cellArrow">
                         {player.heightDirection}
                       </div>
                     </div>
                   </td>
-                  <td className={"cellSingle cellShort " + (player.ageStatus)}>
+                  <td className={"cell cellShort " + (player.ageStatus)}>
                     <div className="cellDirection">
                       <div className="cellValue">
                         {player.age}
                       </div>
-                      <div className="dirArrow">
+                      <div className="cellArrow">
                         {player.ageDirection}
                       </div>
                     </div>
                   </td>
-                  <td className={"cellSingle cellShort " + (player.jerseyStatus)}>
+                  <td className={"cell cellShort " + (player.jerseyStatus)}>
                     <div className="cellDirection">
                       <div className="cellValue">
                         {player.jersey}
                       </div>
-                      <div className="dirArrow">
+                      <div className="cellArrow">
                         {player.jerseyDirection}
                       </div>
                     </div>
@@ -88,9 +88,9 @@ export const Players = ({players}) => {
 
       const PlayerTable = players.map((play, index) => PlayerRow(play, index))
 
-      const tableHeader = <thead className="headerHead">
-                            <tr className="headerRow">
-                                <th className="cellHeader headerLong"></th>
+      const tableHeader = <thead className="cellHeaderHead">
+                            <tr className="cellHeaderRow">
+                                <th className="cellHeader cellHeaderLong"></th>
                                 <th className="cellHeader">TEAM</th>
                                 <th className="cellHeader">CONF</th>
                                 <th className="cellHeader">DIV</th>

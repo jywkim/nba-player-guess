@@ -11,11 +11,27 @@
   padding-right: 5px;
 }
 
-.buttonHeader {
-  border: none;
-  background: transparent;
-  font-size: 14px;
+.appMain {
+  padding-bottom: 90px;
+}
+
+.appTitleH1 {
   font-weight: bold;
+  position: relative;
+  float:left;
+  top: -6px;
+  margin: 0;
+}
+
+.cell {
+  background-color: #edeae5;
+  border: 1px solid #FFFFFF;
+  text-align: center;
+}
+
+.cellArrow {
+  position: absolute;
+  width: 100%;
 }
 
 .cellDirection {
@@ -25,6 +41,14 @@
 .cellHeader {
   text-align: center;
   font-size: 8pt;
+}
+
+.cellHeaderHead {
+  border-bottom: 2px solid;
+}
+
+.cellHeaderLong {
+  width: 3in;
 }
 
 .cellLong {
@@ -38,33 +62,18 @@
   font-size: 1em;
 }
 
-.cellSingle {
-  background-color: #edeae5;
-  border: 1px solid #FFFFFF;
-  text-align: center;
+.cellTeamLogo {
+  width: 40px;
+  height: 40px;
 }
 
-.close-btn {
-  background-color: transparent;
-  font-weight: bold;
-}
-
-.container {
+ .container {
   min-height: 100vh;
   position: relative;
 }
 
-.main {
-  padding-bottom: 90px;
-}
-
-.containersContainer {
+.formContainer {
   position: relative;
-}
-
-.dirArrow {
-  position: absolute;
-  width: 100%;
 }
 
 .footer {
@@ -75,21 +84,15 @@
   background-color: #fff;
 }
 
-.green {
-  background-color: #37be75;
-  color: #fff;
-}
-
 .header {
   background-color: #fff;
 }
 
-.headerHead {
-  border-bottom: 2px solid;
-}
-
-.headerLong {
-  width: 3in;
+.headerButton {
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .highlight {
@@ -111,13 +114,51 @@
   text-align: left;
 }
 
-.playerPic {
-  width: 350px;
+.instructions ul li {
+  margin: 15px 0;
+  line-height: 20px;
 }
 
-.playerTeamLogo {
-  width: 40px;
-  height: 40px;
+.instructions ul {
+  list-style: none;
+  padding: 0;
+}
+
+.instructions li {
+  padding-left: 1.3em;
+}
+
+.instructions li:before {
+  display: inline-block;
+  margin-left: -1.3em;
+  width: 1.3em;
+}
+
+.playersContainer .green {
+  background-color: #37be75;
+  color: #fff;
+}
+
+.playersContainer .red {
+  background-color: #920000;
+  color: #fff;
+}
+
+.playersContainer .yellow {
+  background-color: #f4e878;
+}
+
+.playersContainer tbody {
+  display: block;
+  overflow-y: auto;
+  max-height: calc(100vh - 350px);
+  min-height: 170px;
+}
+
+.playersContainer thead, tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 }
 
 .popup {
@@ -148,6 +189,8 @@
   right: 16px;
   color: black;
   border: none;
+  background-color: transparent;
+  font-weight: bold;
 }
 
 .popupH1 {
@@ -159,9 +202,8 @@
   font-size: 20px;
 }
 
-.red {
-  background-color: #920000;
-  color: #fff;
+.popupPlayerPic {
+  width: 350px;
 }
 
 .silhouette {
@@ -183,51 +225,6 @@
   width: 100%;
 }
 
-tbody {
-  display: block;
-  overflow-y: auto;
-  max-height: calc(100vh - 350px);
-  min-height: 170px;
-}
-
-thead, tbody tr {
-  display: table;
-  width: 100%;
-  table-layout: fixed;
-}
-
-.titleH1 {
-  font-weight: bold;
-  position: relative;
-  float:left;
-  top: -6px;
-  margin: 0;
-}
-
-.yellow {
-  background-color: #f4e878;
-}
-
-ul li {
-  margin: 15px 0;
-  line-height: 20px;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-li {
-  padding-left: 1.3em;
-}
-
-li:before {
-  display: inline-block;
-  margin-left: -1.3em;
-  width: 1.3em;
-}
-
 @media
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
@@ -243,11 +240,11 @@ only screen and (max-width: 760px),
     font-size: 0.9em;
   }
 
-  .headerLong {
+  .cellHeaderLong {
     display: none;
   }
 
-  .playerPic {
+  .popupPlayerPic {
     width: 280px;
   }
 }
