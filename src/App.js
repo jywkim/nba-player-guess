@@ -13,6 +13,7 @@ export default function App() {
   const [counter, setCounter] = useState(1);
   const [cursor, setCursor] = useState(0);
   const [disabled, setDisabled] = useState(false);
+  const [finalGuess, setFinalGuess] = useState(false);
   const [guesses, setGuesses] = useState([]);
   const [instructions, setInstructions] = useState(false);
   const [placeholder, setPlaceholder] = useState("Guess 1 of 8");
@@ -27,6 +28,7 @@ export default function App() {
   const urlPlayerPic = "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/" + randomPlayer.personId + ".png"
   const urlPlayers = "https://data.nba.net/data/10s/prod/v1/2021/players.json";
   const urlTeams = "https://data.nba.net/data/10s/prod/v1/2021/teams.json";
+
 
   useEffect(() => {
     const initializePlayers = async () => {
@@ -53,6 +55,14 @@ export default function App() {
     initializePlayers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (finalGuess) {
+      let randomPlayerStatus = changePlayerStatus(randomPlayer, "red", "red", "red", "red", "red", "red", "red", "red");
+      setGuesses((g) => ([ ...g, randomPlayerStatus ]));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [finalGuess]);
 
   const changePlaceholder = (selectedPlayer) => {
     return (selectedPlayer.personId === randomPlayer.personId) ? 
@@ -85,6 +95,7 @@ export default function App() {
       setDisabled(true);
       setSilhouette(false);
       statusPlayer.final = true;
+      setFinalGuess(true);
       setPopupContent(["Sorry, the correct answer is", randomPlayer.name, "Please try again!"]);
       setPopupDisplay(true);
     }
@@ -179,10 +190,6 @@ export default function App() {
       setPlayer(selectedPlayer);
       let checkedPlayer = checkPlayer(selectedPlayer);
       setGuesses((g) => ([ ...g, checkedPlayer ]));
-      if (checkedPlayer.final) {
-        let randomPlayerStatus = changePlayerStatus(randomPlayer, "red", "red", "red", "red", "red", "red", "red", "red");
-        setGuesses((g) => ([ ...g, randomPlayerStatus ]));
-      }
       setSuggestions([]);
       setCounter(counter + 1);
       setPlayer({ name: "" });

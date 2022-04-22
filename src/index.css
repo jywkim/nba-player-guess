@@ -281,3 +281,73 @@ only screen and (max-width: 760px),
 .fade-exit-done {
   opacity: 0;
 }
+
+.fade2-appear {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade2-appear.fade2-appear-active {
+  opacity: 1;
+  transition: opacity 400ms linear;
+}
+
+.fade3-appear {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade3-appear.fade3-appear-active {
+  opacity: 1;
+  transition: opacity 500ms linear;
+}
+
+.fade4-appear {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade4-appear.fade4-appear-active {
+  opacity: 1;
+  transition: opacity 600ms linear;
+}
+
+.fade5-appear {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade5-appear.fade5-appear-active {
+  opacity: 1;
+  transition: opacity 700ms linear;
+}
+
+.fade6-appear {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade6-appear.fade6-appear-active {
+  opacity: 1;
+  transition: opacity 800ms linear;
+}
+
+.fade7-appear {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade7-appear.fade7-appear-active {
+  opacity: 1;
+  transition: opacity 900ms linear;
+}
+
+.fade8-appear {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade8-appear.fade8-appear-active {
+  opacity: 1;
+  transition: opacity 1000ms linear;
+}
