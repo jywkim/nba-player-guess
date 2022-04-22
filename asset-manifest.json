@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/nba-player-guess/static/css/main.dfa2d0ec.css",
-    "main.js": "/nba-player-guess/static/js/main.55740f82.js",
+    "main.css": "/nba-player-guess/static/css/main.581d5df8.css",
+    "main.js": "/nba-player-guess/static/js/main.4e5646ac.js",
     "static/js/787.b4f008a3.chunk.js": "/nba-player-guess/static/js/787.b4f008a3.chunk.js",
     "index.html": "/nba-player-guess/index.html",
-    "main.dfa2d0ec.css.map": "/nba-player-guess/static/css/main.dfa2d0ec.css.map",
-    "main.55740f82.js.map": "/nba-player-guess/static/js/main.55740f82.js.map",
+    "main.581d5df8.css.map": "/nba-player-guess/static/css/main.581d5df8.css.map",
+    "main.4e5646ac.js.map": "/nba-player-guess/static/js/main.4e5646ac.js.map",
     "787.b4f008a3.chunk.js.map": "/nba-player-guess/static/js/787.b4f008a3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.dfa2d0ec.css",
-    "static/js/main.55740f82.js"
+    "static/css/main.581d5df8.css",
+    "static/js/main.4e5646ac.js"
   ]
 }
