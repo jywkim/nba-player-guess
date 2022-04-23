@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import {SuggestionContainer} from './SuggestionContainer';
 
 export const Form = (props) => {
     const handleSubmit = props.handleSubmit;
@@ -32,14 +33,18 @@ export const Form = (props) => {
                 >
                 </input>
               </div>
-              <div className="suggestionContainer">
+              <div className="suggestionsContainer">
                 {suggestions && suggestions.map((suggestion, i) =>
-                  <div key={i}
-                      id={i}
-                      className={"suggestion col-md-6 justify-content-md-center " + (cursor === i ? "highlight" : null)}
-                      onMouseDown={() => handleMouseDown(suggestion, i)}
-                      onMouseOver={() => handleMouseOver(i)}
-                  >{suggestion.firstName} {suggestion.lastName}</div>
+                    <div key={i}
+                        id={i}
+                        className={"suggestion col-md-6 justify-content-md-center " + (cursor === i ? "highlight" : null)}
+                        onMouseDown={() => handleMouseDown(suggestion, i)}
+                        onMouseOver={() => handleMouseOver(i)}
+                    >
+                  <SuggestionContainer key={suggestion.personId} props={props}>
+                    {suggestion.firstName} {suggestion.lastName}
+                  </SuggestionContainer>
+                    </div>
                 )}
               </div>
             </div>

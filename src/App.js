@@ -39,12 +39,12 @@ export default function App() {
         let playerIds = activePlayers.map(p => p.personId);
         let randomPlayerId = playerIds[Math.floor(Math.random() * playerIds.length)];
         let randomPlayer = activePlayers.find(p => p.personId === randomPlayerId);
-        console.log(randomPlayer);
         await axios.get(urlTeams)
         .then(async resTeams => {
           let name = randomPlayer.firstName + ' ' + randomPlayer.lastName;
           let randomPlayerObj = createPlayerObject(name, randomPlayer, resTeams);
           setRandomPlayer(randomPlayerObj);
+          console.log('Need a hint? The player plays for', randomPlayerObj.team);
         }).catch(err => {
           console.log(err);
         })

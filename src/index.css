@@ -96,7 +96,8 @@
 }
 
 .highlight {
-  background-color: #A0A0A0 !important;
+  background-color: #DCDCDC !important;
+  font-weight: bold;
 }
 
 .input {
@@ -219,7 +220,7 @@
   padding: 15px;
 }
 
-.suggestionContainer {
+.suggestionsContainer {
   z-index: 5;
   position: absolute;
   width: 100%;
@@ -350,4 +351,28 @@ only screen and (max-width: 760px),
 .fade8-appear.fade8-appear-active {
   opacity: 1;
   transition: opacity 1000ms linear;
+}
+
+/* Transition for suggestions */
+.fade-suggest-appear {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade-suggest-appear.fade-suggest-appear-active {
+  opacity: 1;
+  transition: opacity 300ms linear;
+}
+
+.fade-suggest-exit {
+  opacity: 1;
+}
+
+.fade-suggest-exit.fade-suggest-exit-active {
+  opacity: 0;
+  transition: opacity 300ms linear;
+}
+
+.fade-suggest-exit-done {
+  opacity: 0;
 }
