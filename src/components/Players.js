@@ -167,18 +167,27 @@ export const Players = ({players}) => {
 
       const PlayerTable = players.map((play, index) => PlayerRow(play, index))
 
-      const tableHeader = <thead className="cellHeaderHead">
-                            <tr className="cellHeaderRow">
-                                <th className="cellHeader cellHeaderLong"></th>
-                                <th className="cellHeader">TEAM</th>
-                                <th className="cellHeader">CONF</th>
-                                <th className="cellHeader">DIV</th>
-                                <th className="cellHeader">POS</th>
-                                <th className="cellHeader">HT</th>
-                                <th className="cellHeader">AGE</th>
-                                <th className="cellHeader">#</th>
-                            </tr>
-                        </thead>
+      const tableHeader = 
+        <CSSTransition 
+          in={fade}
+          nodeRef={nodeRef}
+          appear={true}
+          timeout={300}
+          classNames="fade"
+        >
+          <thead ref={nodeRef} className="cellHeaderHead">
+              <tr className="cellHeaderRow">
+                  <th className="cellHeader cellHeaderLong"></th>
+                  <th className="cellHeader">TEAM</th>
+                  <th className="cellHeader">CONF</th>
+                  <th className="cellHeader">DIV</th>
+                  <th className="cellHeader">POS</th>
+                  <th className="cellHeader">HT</th>
+                  <th className="cellHeader">AGE</th>
+                  <th className="cellHeader">#</th>
+              </tr>
+          </thead>
+        </CSSTransition>
     
     return (
         <table>
