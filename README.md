@@ -1,17 +1,31 @@
 # NBA Wordle
 
-An NBA player guessing game built in React, inspired by [Poeltl](https://poeltl.dunk.town/).
+A clone of [Poeltl](https://poeltl.dunk.town/) (an NBA player guessing game) that I built in React.
 
 Play the game [here](https://jywkim.github.io/nba-player-guess/)!
 
+## Screenshots
+
 ![Screenshot](/public/screenshot.png)
 
-## Rules
+## Installation and Setup Instructions
 
-Green in any column is a match
+Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
 
-Yellow in TEAM column is player's old team
+Installation:
 
-Yellow in POS column is a partial match (e.g. G and G-F)
+`npm install`  
 
-Yellow in HT, AGE, # columns is within 2 (inches, years, numbers)
+To Start Server:
+
+`npm start`  
+
+To Visit App:
+
+`localhost:3000/nba-player-guess`  
+
+## Notes
+
+As a basketball fan, I loved playing [Poeltl](https://poeltl.dunk.town/) and I thought it would be fun to build a clone. Project goals included using React learned up until this point and familiarizing myself with new features.
+
+Initially I pulled data from [balldontlie API](https://www.balldontlie.io/) because I couldn't find an official NBA API. I then discovered the documentation for the [NBA Stats API](https://github.com/kshvmdn/nba.js) Node.js library and started using the endpoints from there. I began this process by using the `create-react-app` boilerplate.
