@@ -6,7 +6,8 @@ Play the game [here](https://jywkim.github.io/nba-player-guess/)!
 
 ## Screenshots
 
-![Screenshot](/public/screenshot.png)
+![Screenshot of gameplay. Three guesses have been made and are visible.](/public/screenshot1.png)
+![Screenshot of game over. Fourth guess has been made and is confirmed correct.](/public/screenshot2.png)
 
 ## Installation and Setup Instructions
 
@@ -26,6 +27,4 @@ To Visit App:
 
 ## Notes
 
-As a basketball fan, I loved playing [Poeltl](https://poeltl.dunk.town/) and I thought it would be fun to build a clone. Project goals included using React learned up until this point and familiarizing myself with new features.
-
-Initially I pulled data from [balldontlie API](https://www.balldontlie.io/) because I couldn't find an official NBA API. I then discovered the documentation for the [NBA Stats API](https://github.com/kshvmdn/nba.js) Node.js library and started using the endpoints from there. I began this process by using the `create-react-app` boilerplate.
+As a basketball fan, I loved playing [Poeltl](https://poeltl.dunk.town/) and I thought it would be fun to build a clone. Project goals included using React learned up until this point and familiarizing myself with new features. The data used in this project comes from the [endpoints](https://github.com/kshvmdn/nba.js/blob/master/docs/api/DATA.md) described in the [NBA Stats API](https://github.com/kshvmdn/nba.js) Node.js library documentation.
