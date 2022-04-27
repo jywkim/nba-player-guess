@@ -93,6 +93,7 @@
   background: transparent;
   font-size: 14px;
   font-weight: bold;
+  padding: 15px 30px;
 }
 
 .highlight {
@@ -152,7 +153,7 @@
 .playersContainer tbody {
   display: block;
   overflow-y: auto;
-  max-height: calc(100vh - 350px);
+  max-height: calc(100vh - 450px);
   min-height: 170px;
 }
 
@@ -227,8 +228,10 @@
 }
 
 @media
-only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
+only screen and (max-width: 760px) {
+  .appMain {
+    width: 99%;
+  }
 
 	.cellLong {
     display: table-caption;
@@ -243,6 +246,14 @@ only screen and (max-width: 760px),
 
   .cellHeaderLong {
     display: none;
+  }
+
+  .headerButton {
+    padding: 10px 20px;
+  }
+
+  .playersContainer tbody {
+    max-height: calc(100vh - 400px);
   }
 
   .popupPlayerPic {

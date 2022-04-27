@@ -19,7 +19,7 @@ export const Form = (props) => {
             onSubmit={handleSubmit}
             autoComplete="off">
             <div className="formContainer">
-              <div>
+              <div className="inputContainer">
                 <input
                   className="col-md-6 input"
                   name="playerName"

@@ -15,11 +15,6 @@ export const Header = (props) => {
                 className="headerButton" 
                 onClick={showInstructions}>HOW TO PLAY
             </button>
-
-            &nbsp;
-            &nbsp;
-            &nbsp;
-
             <button 
                 className="headerButton"
                 onClick={showSilhouette}>SHOW SILHOUETTE

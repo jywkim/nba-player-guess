@@ -27,4 +27,4 @@ To Visit App:
 
 ## Notes
 
-As a basketball fan, I loved playing [Poeltl](https://poeltl.dunk.town/) and I thought it would be fun to build a clone. Project goals included using React learned up until this point and familiarizing myself with new features. The data used in this project comes from the [endpoints](https://github.com/kshvmdn/nba.js/blob/master/docs/api/DATA.md) described in the [NBA Stats API](https://github.com/kshvmdn/nba.js) Node.js library documentation.
+As a basketball fan, I loved playing [Poeltl](https://poeltl.dunk.town/) and I thought it would be fun to build a clone in React. The data used in this project comes from the [endpoints](https://github.com/kshvmdn/nba.js/blob/master/docs/api/DATA.md) described in the [NBA Stats API](https://github.com/kshvmdn/nba.js) Node.js library documentation.
