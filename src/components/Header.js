@@ -9,15 +9,23 @@ export const Header = (props) => {
         props.silhouette();
       }
 
+    const showStats = () => {
+        props.stats();
+    }
+
     return (
         <div className="header">
             <button 
                 className="headerButton" 
-                onClick={showInstructions}>HOW TO PLAY
+                onClick={showStats}>STATS
+            </button>
+            <button 
+                className="headerButton" 
+                onClick={showInstructions}>RULES
             </button>
             <button 
                 className="headerButton"
-                onClick={showSilhouette}>SHOW SILHOUETTE
+                onClick={showSilhouette}>HINT
             </button>
         </div>
     )

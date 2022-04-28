@@ -8,12 +8,27 @@ import {Instructions} from './components/Instructions';
 import { Players } from './components/Players';
 import Popup from './components/Popup';
 import {Silhouette} from './components/Silhouette';
+import {Stats} from './components/Stats';
 
 export default function App() {
+  const useStickyState = (defaultValue, key) => {
+    const [value, setValue] = useState(() => {
+      const stickyValue = window.localStorage.getItem(key);
+      return stickyValue !== null
+        ? JSON.parse(stickyValue)
+        : defaultValue;
+    });
+    useEffect(() => {
+      window.localStorage.setItem(key, JSON.stringify(value));
+    }, [key, value]);
+    return [value, setValue];
+  };
+
   const [counter, setCounter] = useState(1);
   const [cursor, setCursor] = useState(0);
   const [disabled, setDisabled] = useState(false);
   const [finalGuess, setFinalGuess] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
   const [guesses, setGuesses] = useState([]);
   const [instructions, setInstructions] = useState(false);
   const [placeholder, setPlaceholder] = useState("Guess 1 of 8");
@@ -23,12 +38,15 @@ export default function App() {
   const [popupDisplay, setPopupDisplay] = useState(false);
   const [randomPlayer, setRandomPlayer] = useState({ name: "", personId: "", team: "", teamId: "", teams: [], conf: "", div: "", pos: "", heightFt: "", heightIn: "", age: "", jersey: "" })
   const [silhouette, setSilhouette] = useState(true);
+  const [stats, setStats] = useState(true);
+  const [statsGames, setStatsGames] = useStickyState(0, "games");
+  const [statsGuesses, setStatsGuesses] = useStickyState(0, "guesses");
+  const [statsWins, setStatsWins] = useStickyState(0, "wins");
   const [submit, setSubmit] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
   const urlPlayerPic = "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/" + randomPlayer.personId + ".png"
   const urlPlayers = "https://data.nba.net/data/10s/prod/v1/2021/players.json";
   const urlTeams = "https://data.nba.net/data/10s/prod/v1/2021/teams.json";
-
 
   useEffect(() => {
     const initializePlayers = async () => {
@@ -87,17 +105,23 @@ export default function App() {
     if (selectedPlayer.personId === randomPlayer.personId) {
       setDisabled(true);
       setSilhouette(false);
+      setStats(false);
+      setGameOver(true);
       statusPlayer.nameStatus = "green";
       setPopupContent(["Match!", randomPlayer.name.toUpperCase(), "You solved it in " + (counter) + (counter === 1 ? " guess" : " guesses")]);
       setPopupDisplay(true);
+      updateStats(1);
     }
     if (counter === 8 && selectedPlayer.personId !== randomPlayer.personId) {
       setDisabled(true);
       setSilhouette(false);
+      setStats(false);
+      setGameOver(true);
       statusPlayer.final = true;
       setFinalGuess(true);
       setPopupContent(["Sorry, the correct answer is", randomPlayer.name, "Please try again!"]);
       setPopupDisplay(true);
+      updateStats(0);
     }
 
     let selectedAge = parseInt(selectedPlayer.age);
@@ -294,6 +318,8 @@ export default function App() {
   const showInstructions = () => {
     setInstructions(true);
     setSilhouette(false);
+    setStats(false);
+    setGameOver(false);
     setPopupContent(
       ["Green in any column is a match",
       "Yellow in TEAM column is player's old team",
@@ -306,13 +332,34 @@ export default function App() {
   const showSilhouette = () => {
     setSilhouette(true);
     setInstructions(false);
+    setStats(false);
+    setGameOver(false);
     setPopupContent(["Do you know", "this player?", ""]);
     setPopupDisplay(true);
   }
 
+  const showStats = () => {
+    setStats(true);
+    setSilhouette(false);
+    setInstructions(false);
+    setGameOver(false);
+    setPopupContent(["GP: " + statsGames, "Wins: " + statsWins, "Guesses: " + statsGuesses]);
+    setPopupDisplay(true);
+  }
+
+  const updateStats = (win) => {
+    setStatsGames(statsGames + 1);
+    setStatsWins(statsWins + win);
+    setStatsGuesses(statsGuesses + counter);
+  }
+
   return (
     <div className="container" align="center">
-        <Header className="header" instructions={showInstructions} silhouette={showSilhouette}/>
+        <Header className="header" 
+          instructions={showInstructions} 
+          silhouette={showSilhouette} 
+          stats={showStats}
+        />
         <br/>
         <div className="col-lg-10 appMain">
           <div className="appHeader">
@@ -322,8 +369,7 @@ export default function App() {
           <br/>
           <br/>
           <br/>
-          <Form 
-            className="form" 
+          <Form className="form" 
             handleSubmit = {handleSubmit}
             player = {player}
             handleChange = {handleChange}
@@ -345,15 +391,31 @@ export default function App() {
           )}
 
           <Popup trigger={popupDisplay} setTrigger={setPopupDisplay}>
-            {!instructions ? (
-            <Silhouette 
-              urlPlayerPic={urlPlayerPic} 
-              silhouette={silhouette} 
-              popupContent={popupContent} 
-            />
-            ) : (
-            <Instructions popupContent={popupContent}/>
-            )}
+            {instructions ? (
+              <Instructions popupContent={popupContent}/>
+            ) : ""}
+
+            {silhouette ? (
+              <Silhouette 
+                urlPlayerPic={urlPlayerPic} 
+                silhouette={silhouette} 
+                popupContent={popupContent} 
+              />
+              
+            ) : ""}
+
+            {gameOver ? (
+              <Silhouette 
+                urlPlayerPic={urlPlayerPic} 
+                popupContent={popupContent} 
+              />
+              
+            ) : ""}
+
+            {stats ? (
+              <Stats popupContent={popupContent}/>
+            ) : ""}
+        
           </Popup>
         </div>
         <Footer className="footer"/>
