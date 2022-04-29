@@ -11,6 +11,8 @@ export const Stats = (props) => {
           {popupContent[1]}
           <br></br>
           {popupContent[2]}
+          <br></br>
+          {popupContent[3]}
         </div>
       </div>
     )

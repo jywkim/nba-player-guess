@@ -339,11 +339,17 @@ export default function App() {
   }
 
   const showStats = () => {
+    let winPercent = ((statsWins/statsGames) * 100).toFixed(2);
+    let averageGuesses = (statsGuesses/statsGames).toFixed(2);
+
     setStats(true);
     setSilhouette(false);
     setInstructions(false);
     setGameOver(false);
-    setPopupContent(["GP: " + statsGames, "Wins: " + statsWins, "Guesses: " + statsGuesses]);
+    setPopupContent(["Games Played: " + statsGames, 
+                    "Wins: " + statsWins, 
+                    "Win Percent: " + winPercent + "%", 
+                    "Guesses Per Game: " + averageGuesses]);
     setPopupDisplay(true);
   }
 
