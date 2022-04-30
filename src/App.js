@@ -346,10 +346,10 @@ export default function App() {
     setSilhouette(false);
     setInstructions(false);
     setGameOver(false);
-    setPopupContent(["Games Played: " + statsGames, 
-                    "Wins: " + statsWins, 
-                    "Win Percent: " + winPercent + "%", 
-                    "Guesses Per Game: " + averageGuesses]);
+    setPopupContent([statsGames, 
+                    statsWins, 
+                    (isNaN(parseFloat(winPercent)) ? 0 : winPercent) + "%", 
+                    (isNaN(parseFloat(averageGuesses)) ? 0 : averageGuesses)]);
     setPopupDisplay(true);
   }
 

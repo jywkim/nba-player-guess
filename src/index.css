@@ -212,6 +212,18 @@
   filter: contrast(0%) brightness(0%);
 }
 
+.statsContainer {
+  display: flex;
+}
+
+.statsDiv {
+  width: 110px;
+}
+
+.statsHeader {
+  display: table-caption;
+}
+
 .suggestion {
   cursor: pointer;
   border-right: 1px solid black;
@@ -258,6 +270,10 @@ only screen and (max-width: 760px) {
 
   .popupPlayerPic {
     width: 280px;
+  }
+
+  .statsHeader, .statsHeaderGuesses {
+    font-size: 0.9em;
   }
 }
 
