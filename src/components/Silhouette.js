@@ -9,7 +9,7 @@ export const Silhouette = (props) => {
       <div>
         <img 
           src={urlPlayerPic} 
-          alt={"Image of " + popupContent[1]}
+          alt={"Image of " + (silhouette ? "silhouette" : popupContent[1])}
           className={"popupPlayerPic " + (silhouette ? "silhouette" : "")}
         ></img>
         <br/><br/>

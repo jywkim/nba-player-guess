@@ -6,20 +6,20 @@ export const Stats = (props) => {
     return (
       <div className="statsContainer">
           <div className='statsDiv'>
-            <h5 className='statsHeader'>Games Played</h5>
-            {popupContent[0]}
+            <h6 className='statsHeader'>GAMES<br/>PLAYED</h6>
+            <h3 className='statsValue'>{popupContent[0]}</h3>
           </div>
           <div className='statsDiv'>
-            <h5 className='statsHeader'>Total Wins</h5>
-            {popupContent[1]}
+            <h6 className='statsHeader'>TOTAL<br/>WINS</h6>
+            <h3 className='statsValue'>{popupContent[1]}</h3>
           </div>
           <div className='statsDiv'>
-            <h5 className='statsHeader'>Win Pct</h5>
-            {popupContent[2]}
+            <h6 className='statsHeader'>WIN<br/>PCT</h6>
+            <h3 className='statsValue'>{popupContent[2]}</h3>
           </div>
           <div className='statsDiv'>
-            <h5 className='statsHeaderGuesses'>Guesses Per Game</h5>
-            {popupContent[3]}
+            <h6 className='statsHeader'>GUESSES<br/>PER GAME</h6>
+            <h3 className='statsValue'>{popupContent[3]}</h3>
           </div>
       </div>
     )

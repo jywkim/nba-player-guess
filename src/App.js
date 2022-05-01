@@ -339,8 +339,8 @@ export default function App() {
   }
 
   const showStats = () => {
-    let winPercent = ((statsWins/statsGames) * 100).toFixed(2);
-    let averageGuesses = (statsGuesses/statsGames).toFixed(2);
+    let winPercent = ((statsWins/statsGames) * 100).toFixed(1);
+    let averageGuesses = (statsGuesses/statsGames).toFixed(1);
 
     setStats(true);
     setSilhouette(false);
