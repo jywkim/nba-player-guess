@@ -41,12 +41,14 @@ export default function App() {
   const [stats, setStats] = useState(true);
   const [statsGames, setStatsGames] = useStickyState(0, "games");
   const [statsGuesses, setStatsGuesses] = useStickyState(0, "guesses");
+  const [statsCurrentStreak, setStatsCurrentStreak] = useStickyState(0, "currentstreak");
+  const [statsMaxStreak, setStatsMaxStreak] = useStickyState(0, "maxstreak");
   const [statsWins, setStatsWins] = useStickyState(0, "wins");
   const [submit, setSubmit] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
-  const urlPlayerPic = "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/" + randomPlayer.personId + ".png"
-  const urlPlayers = "https://data.nba.net/data/10s/prod/v1/2021/players.json";
-  const urlTeams = "https://data.nba.net/data/10s/prod/v1/2021/teams.json";
+  const urlPlayerPic = process.env.REACT_APP_PLAYER_IMG + randomPlayer.personId + ".png"
+  const urlPlayers = process.env.REACT_APP_PLAYERS_URL;
+  const urlTeams = process.env.REACT_APP_TEAMS_URL;
 
   useEffect(() => {
     const initializePlayers = async () => {
@@ -135,19 +137,15 @@ export default function App() {
     let confStatus = checkConference(selectedPlayer, randomPlayer);
     let divStatus = checkDivision(selectedPlayer, randomPlayer);
     let posStatus = checkPosition(selectedPlayer, randomPlayer);
-    let heightStatus = checkHeight(selectedInchesTotal, randomInchesTotal);
-    let ageStatus = checkAge(selectedAge, randomAge);
-    let jerseyStatus = checkJersey(selectedJersey, randomJersey);
+    let heightStatus = checkWithinTwo(selectedInchesTotal, randomInchesTotal);
+    let ageStatus = checkWithinTwo(selectedAge, randomAge);
+    let jerseyStatus = checkWithinTwo(selectedJersey, randomJersey);
     let selectedPlayerStatus = changePlayerStatus(statusPlayer, statusPlayer.nameStatus, teamStatus, confStatus, divStatus, posStatus, heightStatus, ageStatus, jerseyStatus);
 
     selectedPlayerStatus.heightDirection = checkDirection(selectedInchesTotal, randomInchesTotal);
     selectedPlayerStatus.ageDirection = checkDirection(selectedAge, randomAge);
     selectedPlayerStatus.jerseyDirection = checkDirection(selectedJersey, randomJersey);
     return selectedPlayerStatus;
-  }
-
-  const checkAge = (selectedAge, randomAge)  => {
-    return checkWithinTwo(selectedAge, randomAge);
   }
 
   const checkConference = (selectedPlayer, randomPlayer) => {
@@ -161,14 +159,6 @@ export default function App() {
 
   const checkDivision = (selectedPlayer, randomPlayer) => {
     if (selectedPlayer.div === randomPlayer.div) return "green";
-  }
-
-  const checkHeight = (selectedInchesTotal, randomInchesTotal) => {
-    return checkWithinTwo(selectedInchesTotal, randomInchesTotal);
-  }
-
-  const checkJersey = (selectedJersey, randomJersey)  => {
-    return checkWithinTwo(selectedJersey, randomJersey);
   }
 
   const checkPosition = (selectedPlayer, randomPlayer) => {
@@ -349,7 +339,10 @@ export default function App() {
     setPopupContent([statsGames, 
                     statsWins, 
                     (isNaN(parseFloat(winPercent)) ? 0 : winPercent) + "%", 
-                    (isNaN(parseFloat(averageGuesses)) ? 0 : averageGuesses)]);
+                    (isNaN(parseFloat(averageGuesses)) ? 0 : averageGuesses),
+                    statsCurrentStreak,
+                    statsMaxStreak]
+                    );
     setPopupDisplay(true);
   }
 
@@ -357,6 +350,11 @@ export default function App() {
     setStatsGames(statsGames + 1);
     setStatsWins(statsWins + win);
     setStatsGuesses(statsGuesses + counter);
+
+    setStatsCurrentStreak(win ? (statsCurrentStreak + win) : 0);
+    if (win && (statsCurrentStreak + win) > statsMaxStreak) {
+      setStatsMaxStreak(statsMaxStreak + win);
+    }
   }
 
   return (

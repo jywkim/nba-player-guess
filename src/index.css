@@ -206,6 +206,7 @@
 
 .popupPlayerPic {
   width: 350px;
+  pointer-events: none;
 }
 
 .silhouette {
@@ -214,10 +215,11 @@
 
 .statsContainer {
   display: flex;
+  justify-content: space-evenly;
 }
 
 .statsDiv {
-  width: 110px;
+  width: 100px;
 }
 
 .suggestion {
