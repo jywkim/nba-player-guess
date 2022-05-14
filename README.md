@@ -6,7 +6,7 @@ Play the game [here](https://jywkim.github.io/nba-player-guess/)!
 
 ## Screenshots
 
-<img src="./public/screenshot4.png" alt="Screenshot of silhouette of mystery player." width="300"/> <img src="./public/screenshot1.png" alt="Screenshot of gameplay. Three guesses have been made and are visible." width="300"/> <img src="./public/screenshot2.png" alt="Screenshot of game over. Fourth guess has been made and is confirmed correct." width="300"/> <img src="./public/screenshot3.png" alt="Screenshot of stats: Games played, total wins, win %, guesses per game, current streak, max streak." width="300"/>
+<img src="./public/screenshot4.png" alt="Screenshot of silhouette of mystery player." width="200"/> <img src="./public/screenshot1.png" alt="Screenshot of gameplay. Three guesses have been made and are visible." width="200"/> <img src="./public/screenshot2.png" alt="Screenshot of game over. Fourth guess has been made and is confirmed correct." width="200"/> <img src="./public/screenshot3.png" alt="Screenshot of stats: Games played, total wins, win %, guesses per game, current streak, max streak." width="200"/>
 
 ## Installation and Setup Instructions
 
