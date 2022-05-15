@@ -133,10 +133,10 @@ export default function App() {
     let selectedJersey = parseInt(selectedPlayer.jersey);
     let randomJersey = parseInt(randomPlayer.jersey);
 
-    let teamStatus = checkTeam(selectedPlayer, randomPlayer);
-    let confStatus = checkConference(selectedPlayer, randomPlayer);
-    let divStatus = checkDivision(selectedPlayer, randomPlayer);
-    let posStatus = checkPosition(selectedPlayer, randomPlayer);
+    let teamStatus = (selectedPlayer.team === randomPlayer.team) ? "green" : checkTeamHistory(selectedPlayer, randomPlayer);
+    let confStatus = (selectedPlayer.conf === randomPlayer.conf) ? "green" : "";
+    let divStatus = (selectedPlayer.div === randomPlayer.div) ? "green" : "";
+    let posStatus = (selectedPlayer.pos === randomPlayer.pos) ? "green" : checkPositionPartialMatch(selectedPlayer, randomPlayer);
     let heightStatus = checkWithinTwo(selectedInchesTotal, randomInchesTotal);
     let ageStatus = checkWithinTwo(selectedAge, randomAge);
     let jerseyStatus = checkWithinTwo(selectedJersey, randomJersey);
@@ -148,21 +148,12 @@ export default function App() {
     return selectedPlayerStatus;
   }
 
-  const checkConference = (selectedPlayer, randomPlayer) => {
-    if (selectedPlayer.conf === randomPlayer.conf) return "green";
-  }
-
   const checkDirection = (selected, random) => {
     if (selected > random) return "↓";
     if (selected < random) return "↑";
   }
 
-  const checkDivision = (selectedPlayer, randomPlayer) => {
-    if (selectedPlayer.div === randomPlayer.div) return "green";
-  }
-
-  const checkPosition = (selectedPlayer, randomPlayer) => {
-    if (selectedPlayer.pos === randomPlayer.pos) return "green";
+  const checkPositionPartialMatch = (selectedPlayer, randomPlayer) => {
     let selectedPos = selectedPlayer.pos.replace(/[^a-zA-Z]+/g, '');
     let randomPos = randomPlayer.pos.replace(/[^a-zA-Z]+/g, '');
     let randomPosSplit = randomPos.split("");
@@ -171,8 +162,7 @@ export default function App() {
     }
   }
 
-  const checkTeam = (selectedPlayer, randomPlayer) => {
-    if (selectedPlayer.team === randomPlayer.team) return "green";
+  const checkTeamHistory = (selectedPlayer, randomPlayer) => {
     let randomPlayerTeams = randomPlayer.teams.map(t => t.teamId);
     if (randomPlayerTeams.includes(selectedPlayer.teamId)) return "yellow";
   }
