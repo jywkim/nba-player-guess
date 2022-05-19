@@ -5,7 +5,7 @@ export const Instructions = (props) => {
 
     return (
       <div className="instructions">
-        <h1 className="instructionH1">Guess the NBA player in 8 tries!</h1>
+        <h1 className="instructionH1" data-testid="instructions-text">Guess the NBA player in 8 tries!</h1>
         <div className="instructionList">
           <ul>
             {popupContent.map(function(p, index){

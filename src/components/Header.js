@@ -17,15 +17,21 @@ export const Header = (props) => {
         <div className="header">
             <button 
                 className="headerButton" 
-                onClick={showStats}>STATS
+                onClick={showStats}
+                data-testid="stats-button"
+                >STATS
             </button>
             <button 
                 className="headerButton" 
-                onClick={showInstructions}>RULES
+                onClick={showInstructions}
+                data-testid="rules-button"
+                >RULES
             </button>
             <button 
                 className="headerButton"
-                onClick={showSilhouette}>HINT
+                onClick={showSilhouette}
+                data-testid="hint-button"
+                >HINT
             </button>
         </div>
     )

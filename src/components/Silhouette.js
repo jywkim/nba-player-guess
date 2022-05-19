@@ -15,7 +15,7 @@ export const Silhouette = (props) => {
         <br/><br/>
         <div className="popupResult">
           <h1 className="popupH2">{popupContent[0]}</h1>
-          <h1 className="popupH1">{popupContent[1].toUpperCase()}</h1>
+          <h1 className="popupH1" data-testid="silhouette-text">{popupContent[1].toUpperCase()}</h1>
           <h1 className="popupH2">{popupContent[2]}</h1>
         </div>
       </div>

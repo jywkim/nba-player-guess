@@ -7,7 +7,7 @@ export const Stats = (props) => {
       <div className="statsContainer">
         <div className='statsRow'>
           <div className='statsDiv'>
-            <h6 className='statsHeader'>GAMES<br/>PLAYED</h6>
+            <h6 className='statsHeader' data-testid="stats-text">GAMES<br/>PLAYED</h6>
             <h3 className='statsValue'>{popupContent[0]}</h3>
           </div>
           <div className='statsDiv'>
