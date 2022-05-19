@@ -24,6 +24,7 @@ export const Form = (props) => {
                   className="col-md-6 input"
                   name="playerName"
                   type="text"
+                  data-testid="player-input"
                   value={player.name}
                   onChange={handleChange}
                   placeholder={placeholder}
