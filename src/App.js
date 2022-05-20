@@ -51,30 +51,40 @@ export default function App() {
   const urlTeams = process.env.REACT_APP_TEAMS_URL;
 
   useEffect(() => {
-    const initializePlayers = async () => {
+    const initializePlayerPool = async () => {
       await axios.get(urlPlayers)
       .then(async resPlayers => {
         let activePlayers = resPlayers.data.league.standard.filter(p => p.isActive === true);
         setPlayers(activePlayers);
-        let playerIds = activePlayers.map(p => p.personId);
-        let randomPlayerId = playerIds[Math.floor(Math.random() * playerIds.length)];
-        let randomPlayer = activePlayers.find(p => p.personId === randomPlayerId);
-        await axios.get(urlTeams)
-        .then(async resTeams => {
-          let name = randomPlayer.firstName + ' ' + randomPlayer.lastName;
-          let randomPlayerObj = createPlayerObject(name, randomPlayer, resTeams);
-          setRandomPlayer(randomPlayerObj);
-          console.log('Need a hint? The player plays for', randomPlayerObj.team);
-        }).catch(err => {
-          console.log(err);
-        })
       }).catch(err => {
         console.log(err);
       })
     }
-    initializePlayers();
+
+    initializePlayerPool();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const initializeMysteryPlayer = async () => {
+      console.log(players);
+      let playerIds = players.map(p => p.personId);
+      let randomPlayerId = playerIds[Math.floor(Math.random() * playerIds.length)];
+      let randomPlayer = players.find(p => p.personId === randomPlayerId);
+      await axios.get(urlTeams)
+      .then(async resTeams => {
+        let name = randomPlayer.firstName + ' ' + randomPlayer.lastName;
+        let randomPlayerObj = createPlayerObject(name, randomPlayer, resTeams);
+        setRandomPlayer(randomPlayerObj);
+        console.log('Need a hint? The player plays for', randomPlayerObj.team);
+      }).catch(err => {
+        console.log(err);
+      })
+    }
+
+    if (players.length > 0) initializeMysteryPlayer();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [players]);
 
   useEffect(() => {
     if (finalGuess) {
