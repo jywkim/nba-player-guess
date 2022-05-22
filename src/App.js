@@ -67,7 +67,6 @@ export default function App() {
 
   useEffect(() => {
     const initializeMysteryPlayer = async () => {
-      console.log(players);
       let playerIds = players.map(p => p.personId);
       let randomPlayerId = playerIds[Math.floor(Math.random() * playerIds.length)];
       let randomPlayer = players.find(p => p.personId === randomPlayerId);
@@ -183,17 +182,21 @@ export default function App() {
   }
 
   const createPlayerObject = (name, playerRes, teamRes) => {
-    let personId = playerRes.personId;
     let team = teamRes.data.league.standard.find(t => t.teamId === playerRes.teamId);
-    let teamId = playerRes.teamId;
-    let teams = playerRes.teams;
-    let div = shortenDivision(team.divName);
-    let pos = playerRes.pos;
-    let heightFt = playerRes.heightFeet;
-    let heightIn = playerRes.heightInches;
-    let age = getAge(playerRes.dateOfBirthUTC);
-    let jersey = playerRes.jersey;
-    let playerObject = {name: name, personId: personId, team: team.tricode, teamId: teamId, teams: teams, conf: team.confName, div: div, pos: pos, heightFt: heightFt, heightIn: heightIn, age: age, jersey: jersey};
+    let playerObject = {
+      name: name, 
+      personId: playerRes.personId, 
+      team: team.tricode, 
+      teamId: playerRes.teamId, 
+      teams: playerRes.teams, 
+      conf: team.confName, 
+      div: shortenDivision(team.divName), 
+      pos: playerRes.pos, 
+      heightFt: playerRes.heightFeet, 
+      heightIn: playerRes.heightInches, 
+      age: getAge(playerRes.dateOfBirthUTC), 
+      jersey: playerRes.jersey
+    };
     return playerObject;
   }
 
@@ -218,9 +221,7 @@ export default function App() {
     var birthDate = new Date(dateOfBirth);
     var age = today.getFullYear() - birthDate.getFullYear();
     var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
     return age;
   }
 
@@ -262,8 +263,7 @@ export default function App() {
   }
 
   const handleMouseDown = (suggestion, i) => {
-    let name = suggestion.firstName + ' ' + suggestion.lastName;
-    enterPlayer(name, suggestions, i);
+    enterPlayer(suggestion.firstName + ' ' + suggestion.lastName, suggestions, i);
     setSubmit(true);
   }
 
@@ -273,9 +273,7 @@ export default function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (e.target[0].value.length !== 0) {
-      setSubmit(true);
-    }
+    if (e.target[0].value.length !== 0) setSubmit(true);
   }
 
   const shortenDivision = (division) => {
@@ -395,30 +393,22 @@ export default function App() {
           )}
 
           <Popup trigger={popupDisplay} setTrigger={setPopupDisplay}>
-            {instructions ? (
-              <Instructions popupContent={popupContent}/>
-            ) : ""}
+            {instructions ? (<Instructions popupContent={popupContent}/>) : ""}
 
             {silhouette ? (
               <Silhouette 
                 urlPlayerPic={urlPlayerPic} 
                 silhouette={silhouette} 
                 popupContent={popupContent} 
-              />
-              
-            ) : ""}
+              />) : ""}
 
             {gameOver ? (
               <Silhouette 
                 urlPlayerPic={urlPlayerPic} 
                 popupContent={popupContent} 
-              />
-              
-            ) : ""}
+              />) : ""}
 
-            {stats ? (
-              <Stats popupContent={popupContent}/>
-            ) : ""}
+            {stats ? (<Stats popupContent={popupContent}/>) : ""}
         
           </Popup>
         </div>
