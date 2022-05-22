@@ -54,7 +54,7 @@ export default function App() {
     const initializePlayerPool = async () => {
       await axios.get(urlPlayers)
       .then(async resPlayers => {
-        let activePlayers = resPlayers.data.league.standard.filter(p => p.isActive === true);
+        const activePlayers = resPlayers.data.league.standard.filter(p => p.isActive === true);
         setPlayers(activePlayers);
       }).catch(err => {
         console.log(err);
@@ -67,13 +67,13 @@ export default function App() {
 
   useEffect(() => {
     const initializeMysteryPlayer = async () => {
-      let playerIds = players.map(p => p.personId);
-      let randomPlayerId = playerIds[Math.floor(Math.random() * playerIds.length)];
-      let randomPlayer = players.find(p => p.personId === randomPlayerId);
+      const playerIds = players.map(p => p.personId);
+      const randomPlayerId = playerIds[Math.floor(Math.random() * playerIds.length)];
+      const randomPlayer = players.find(p => p.personId === randomPlayerId);
       await axios.get(urlTeams)
       .then(async resTeams => {
-        let name = randomPlayer.firstName + ' ' + randomPlayer.lastName;
-        let randomPlayerObj = createPlayerObject(name, randomPlayer, resTeams);
+        const name = randomPlayer.firstName + ' ' + randomPlayer.lastName;
+        const randomPlayerObj = createPlayerObject(name, randomPlayer, resTeams);
         setRandomPlayer(randomPlayerObj);
         console.log('Need a hint? The player plays for', randomPlayerObj.team);
       }).catch(err => {
@@ -87,7 +87,7 @@ export default function App() {
 
   useEffect(() => {
     if (finalGuess) {
-      let randomPlayerStatus = changePlayerStatus(randomPlayer, "red", "red", "red", "red", "red", "red", "red", "red");
+      const randomPlayerStatus = changePlayerStatus(randomPlayer, "red", "red", "red", "red", "red", "red", "red", "red");
       setGuesses((g) => ([ ...g, randomPlayerStatus ]));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -112,7 +112,7 @@ export default function App() {
   }
 
   const checkPlayer = (selectedPlayer) => {
-    let statusPlayer = selectedPlayer;
+    const statusPlayer = selectedPlayer;
     if (selectedPlayer.personId === randomPlayer.personId) {
       setDisabled(true);
       setSilhouette(false);
@@ -135,21 +135,21 @@ export default function App() {
       updateStats(0);
     }
 
-    let selectedAge = parseInt(selectedPlayer.age);
-    let randomAge = parseInt(randomPlayer.age);
-    let selectedInchesTotal = parseInt(selectedPlayer.heightFt) * 12 + parseInt(selectedPlayer.heightIn);
-    let randomInchesTotal = parseInt(randomPlayer.heightFt) * 12 + parseInt(randomPlayer.heightIn);
-    let selectedJersey = parseInt(selectedPlayer.jersey);
-    let randomJersey = parseInt(randomPlayer.jersey);
+    const selectedAge = parseInt(selectedPlayer.age);
+    const randomAge = parseInt(randomPlayer.age);
+    const selectedInchesTotal = parseInt(selectedPlayer.heightFt) * 12 + parseInt(selectedPlayer.heightIn);
+    const randomInchesTotal = parseInt(randomPlayer.heightFt) * 12 + parseInt(randomPlayer.heightIn);
+    const selectedJersey = parseInt(selectedPlayer.jersey);
+    const randomJersey = parseInt(randomPlayer.jersey);
 
-    let teamStatus = (selectedPlayer.team === randomPlayer.team) ? "green" : checkTeamHistory(selectedPlayer, randomPlayer);
-    let confStatus = (selectedPlayer.conf === randomPlayer.conf) ? "green" : "";
-    let divStatus = (selectedPlayer.div === randomPlayer.div) ? "green" : "";
-    let posStatus = (selectedPlayer.pos === randomPlayer.pos) ? "green" : checkPositionPartialMatch(selectedPlayer, randomPlayer);
-    let heightStatus = checkWithinTwo(selectedInchesTotal, randomInchesTotal);
-    let ageStatus = checkWithinTwo(selectedAge, randomAge);
-    let jerseyStatus = checkWithinTwo(selectedJersey, randomJersey);
-    let selectedPlayerStatus = changePlayerStatus(statusPlayer, statusPlayer.nameStatus, teamStatus, confStatus, divStatus, posStatus, heightStatus, ageStatus, jerseyStatus);
+    const teamStatus = (selectedPlayer.team === randomPlayer.team) ? "green" : checkTeamHistory(selectedPlayer, randomPlayer);
+    const confStatus = (selectedPlayer.conf === randomPlayer.conf) ? "green" : "";
+    const divStatus = (selectedPlayer.div === randomPlayer.div) ? "green" : "";
+    const posStatus = (selectedPlayer.pos === randomPlayer.pos) ? "green" : checkPositionPartialMatch(selectedPlayer, randomPlayer);
+    const heightStatus = checkWithinTwo(selectedInchesTotal, randomInchesTotal);
+    const ageStatus = checkWithinTwo(selectedAge, randomAge);
+    const jerseyStatus = checkWithinTwo(selectedJersey, randomJersey);
+    const selectedPlayerStatus = changePlayerStatus(statusPlayer, statusPlayer.nameStatus, teamStatus, confStatus, divStatus, posStatus, heightStatus, ageStatus, jerseyStatus);
 
     selectedPlayerStatus.heightDirection = checkDirection(selectedInchesTotal, randomInchesTotal);
     selectedPlayerStatus.ageDirection = checkDirection(selectedAge, randomAge);
@@ -163,16 +163,15 @@ export default function App() {
   }
 
   const checkPositionPartialMatch = (selectedPlayer, randomPlayer) => {
-    let selectedPos = selectedPlayer.pos.replace(/[^a-zA-Z]+/g, '');
-    let randomPos = randomPlayer.pos.replace(/[^a-zA-Z]+/g, '');
-    let randomPosSplit = randomPos.split("");
-    for (let i = 0; i < randomPosSplit.length; i++) {
+    const selectedPos = selectedPlayer.pos.replace(/[^a-zA-Z]+/g, '');
+    const randomPos = randomPlayer.pos.replace(/[^a-zA-Z]+/g, '');
+    for (let i = 0; i < randomPos.split("").length; i++) {
       if (selectedPos.includes(randomPos[i])) return "yellow";
     }
   }
 
   const checkTeamHistory = (selectedPlayer, randomPlayer) => {
-    let randomPlayerTeams = randomPlayer.teams.map(t => t.teamId);
+    const randomPlayerTeams = randomPlayer.teams.map(t => t.teamId);
     if (randomPlayerTeams.includes(selectedPlayer.teamId)) return "yellow";
   }
 
@@ -182,8 +181,8 @@ export default function App() {
   }
 
   const createPlayerObject = (name, playerRes, teamRes) => {
-    let team = teamRes.data.league.standard.find(t => t.teamId === playerRes.teamId);
-    let playerObject = {
+    const team = teamRes.data.league.standard.find(t => t.teamId === playerRes.teamId);
+    const playerObject = {
       name: name, 
       personId: playerRes.personId, 
       team: team.tricode, 
@@ -203,9 +202,9 @@ export default function App() {
   const enterPlayer = (name, suggestions, i) => {
     axios.get(urlTeams)
     .then(async res => {
-      let selectedPlayer = createPlayerObject(name, suggestions[i], res);
+      const selectedPlayer = createPlayerObject(name, suggestions[i], res);
       setPlayer(selectedPlayer);
-      let checkedPlayer = checkPlayer(selectedPlayer);
+      const checkedPlayer = checkPlayer(selectedPlayer);
       setGuesses((g) => ([ ...g, checkedPlayer ]));
       setSuggestions([]);
       setCounter(counter + 1);
@@ -217,10 +216,10 @@ export default function App() {
   }
 
   const getAge = (dateOfBirth) => {
-    var today = new Date();
-    var birthDate = new Date(dateOfBirth);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
+    const today = new Date();
+    const birthDate = new Date(dateOfBirth);
+    const m = today.getMonth() - birthDate.getMonth();
+    let age = today.getFullYear() - birthDate.getFullYear();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
     return age;
   }
@@ -234,13 +233,13 @@ export default function App() {
 
  const handleChange = (e) => {
     setCursor(0);
-    let text = e.target.value;
-    let replaceText = text.replace(/([.?*+^$[\]\\(){}|-])/g, '');
+    const text = e.target.value;
+    const replaceText = text.replace(/([.?*+^$[\]\\(){}|-])/g, '');
     let matches = [];
     if (text.length > 0) {
       matches = players.filter(player => {
         const regex = new RegExp(`${replaceText}`, "gi");
-        let playerFullName = player.firstName + ' ' + player.lastName;
+        const playerFullName = player.firstName + ' ' + player.lastName;
         return playerFullName.match(regex);
       });
     }
@@ -254,7 +253,7 @@ export default function App() {
     } else if (e.keyCode === 40 && cursor < suggestions.length - 1) {
       setCursor(cursor + 1);
     } else if (e.keyCode === 13) {
-      let name = suggestions[cursor] ? (suggestions[cursor].firstName + " " + suggestions[cursor].lastName) : "";
+      const name = suggestions[cursor] ? (suggestions[cursor].firstName + " " + suggestions[cursor].lastName) : "";
       if (name.length) {
         setInstructions(false);
         enterPlayer(name, suggestions, cursor);
@@ -327,9 +326,8 @@ export default function App() {
   }
 
   const showStats = () => {
-    let winPercent = ((statsWins/statsGames) * 100).toFixed(1);
-    let averageGuesses = (statsGuesses/statsGames).toFixed(1);
-
+    const winPercent = ((statsWins/statsGames) * 100).toFixed(1);
+    const averageGuesses = (statsGuesses/statsGames).toFixed(1);
     setStats(true);
     setSilhouette(false);
     setInstructions(false);
@@ -348,7 +346,6 @@ export default function App() {
     setStatsGames(statsGames + 1);
     setStatsWins(statsWins + win);
     setStatsGuesses(statsGuesses + counter);
-
     setStatsCurrentStreak(win ? (statsCurrentStreak + win) : 0);
     if (win && (statsCurrentStreak + win) > statsMaxStreak) {
       setStatsMaxStreak(statsMaxStreak + win);
