@@ -87,7 +87,17 @@ export default function App() {
 
   useEffect(() => {
     if (finalGuess) {
-      const randomPlayerStatus = changePlayerStatus(randomPlayer, "red", "red", "red", "red", "red", "red", "red", "red");
+      const coloursObject = {
+        name: "red", 
+        team: "red", 
+        conf: "red", 
+        div: "red", 
+        pos: "red", 
+        height: "red", 
+        age: "red", 
+        jersey: "red"
+      };
+      const randomPlayerStatus = changePlayerStatus(randomPlayer, coloursObject);
       setGuesses((g) => ([ ...g, randomPlayerStatus ]));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -99,15 +109,15 @@ export default function App() {
            counter < 8 ? "Guess " + (counter + 1) + " of 8" : "Game Over";
   }
 
-  const changePlayerStatus = (player, name, team, conf, div, pos, height, age, jersey) => {
-    player.nameStatus = name;
-    player.teamStatus = team;
-    player.confStatus = conf;
-    player.divStatus = div;
-    player.posStatus = pos;
-    player.heightStatus = height;
-    player.ageStatus = age;
-    player.jerseyStatus = jersey;
+  const changePlayerStatus = (player, coloursObject) => {
+    player.nameStatus = coloursObject.name;
+    player.teamStatus = coloursObject.team;
+    player.confStatus = coloursObject.conf;
+    player.divStatus = coloursObject.div;
+    player.posStatus = coloursObject.pos;
+    player.heightStatus = coloursObject.height;
+    player.ageStatus = coloursObject.age;
+    player.jerseyStatus = coloursObject.jersey;
     return player;
   }
 
@@ -134,23 +144,23 @@ export default function App() {
       setPopupDisplay(true);
       updateStats(0);
     }
-
     const selectedAge = parseInt(selectedPlayer.age);
     const randomAge = parseInt(randomPlayer.age);
     const selectedInchesTotal = parseInt(selectedPlayer.heightFt) * 12 + parseInt(selectedPlayer.heightIn);
     const randomInchesTotal = parseInt(randomPlayer.heightFt) * 12 + parseInt(randomPlayer.heightIn);
     const selectedJersey = parseInt(selectedPlayer.jersey);
     const randomJersey = parseInt(randomPlayer.jersey);
-
-    const teamStatus = (selectedPlayer.team === randomPlayer.team) ? "green" : checkTeamHistory(selectedPlayer, randomPlayer);
-    const confStatus = (selectedPlayer.conf === randomPlayer.conf) ? "green" : "";
-    const divStatus = (selectedPlayer.div === randomPlayer.div) ? "green" : "";
-    const posStatus = (selectedPlayer.pos === randomPlayer.pos) ? "green" : checkPositionPartialMatch(selectedPlayer, randomPlayer);
-    const heightStatus = checkWithinTwo(selectedInchesTotal, randomInchesTotal);
-    const ageStatus = checkWithinTwo(selectedAge, randomAge);
-    const jerseyStatus = checkWithinTwo(selectedJersey, randomJersey);
-    const selectedPlayerStatus = changePlayerStatus(statusPlayer, statusPlayer.nameStatus, teamStatus, confStatus, divStatus, posStatus, heightStatus, ageStatus, jerseyStatus);
-
+    const coloursObject = {
+      name: statusPlayer.nameStatus, 
+      team: (selectedPlayer.team === randomPlayer.team) ? "green" : checkTeamHistory(selectedPlayer, randomPlayer), 
+      conf: (selectedPlayer.conf === randomPlayer.conf) ? "green" : "", 
+      div: (selectedPlayer.div === randomPlayer.div) ? "green" : "", 
+      pos: (selectedPlayer.pos === randomPlayer.pos) ? "green" : checkPositionPartialMatch(selectedPlayer, randomPlayer), 
+      height: checkWithinTwo(selectedInchesTotal, randomInchesTotal), 
+      age: checkWithinTwo(selectedAge, randomAge), 
+      jersey: checkWithinTwo(selectedJersey, randomJersey)
+    };
+    const selectedPlayerStatus = changePlayerStatus(statusPlayer, coloursObject);
     selectedPlayerStatus.heightDirection = checkDirection(selectedInchesTotal, randomInchesTotal);
     selectedPlayerStatus.ageDirection = checkDirection(selectedAge, randomAge);
     selectedPlayerStatus.jerseyDirection = checkDirection(selectedJersey, randomJersey);
