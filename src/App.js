@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "./index.css";
 import axios from 'axios';
 import {Header} from './components/Header';
@@ -62,7 +62,25 @@ export default function App() {
     }
 
     initializePlayerPool();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [urlPlayers]);
+
+  const createPlayerObject = useCallback((name, playerRes, teamRes) => {
+    const team = teamRes.data.league.standard.find(t => t.teamId === playerRes.teamId);
+    const playerObject = {
+      name: name, 
+      personId: playerRes.personId, 
+      team: team.tricode, 
+      teamId: playerRes.teamId, 
+      teams: playerRes.teams, 
+      conf: team.confName, 
+      div: shortenDivision(team.divName), 
+      pos: playerRes.pos, 
+      heightFt: playerRes.heightFeet, 
+      heightIn: playerRes.heightInches, 
+      age: getAge(playerRes.dateOfBirthUTC), 
+      jersey: playerRes.jersey
+    };
+    return playerObject;
   }, []);
 
   useEffect(() => {
@@ -82,8 +100,7 @@ export default function App() {
     }
 
     if (players.length > 0) initializeMysteryPlayer();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [players]);
+  }, [players, urlTeams, createPlayerObject]);
 
   useEffect(() => {
     if (finalGuess) {
@@ -100,8 +117,7 @@ export default function App() {
       const randomPlayerStatus = changePlayerStatus(randomPlayer, coloursObject);
       setGuesses((g) => ([ ...g, randomPlayerStatus ]));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [finalGuess]);
+  }, [finalGuess, randomPlayer]);
 
   const changePlaceholder = (selectedPlayer) => {
     return (selectedPlayer.personId === randomPlayer.personId) ? 
@@ -188,25 +204,6 @@ export default function App() {
   const checkWithinTwo = (selected, random) => {
     if (selected === random) return "green";
     if (selected >= random - 2 && selected <= random + 2) return "yellow";
-  }
-
-  const createPlayerObject = (name, playerRes, teamRes) => {
-    const team = teamRes.data.league.standard.find(t => t.teamId === playerRes.teamId);
-    const playerObject = {
-      name: name, 
-      personId: playerRes.personId, 
-      team: team.tricode, 
-      teamId: playerRes.teamId, 
-      teams: playerRes.teams, 
-      conf: team.confName, 
-      div: shortenDivision(team.divName), 
-      pos: playerRes.pos, 
-      heightFt: playerRes.heightFeet, 
-      heightIn: playerRes.heightInches, 
-      age: getAge(playerRes.dateOfBirthUTC), 
-      jersey: playerRes.jersey
-    };
-    return playerObject;
   }
 
   const enterPlayer = (name, suggestions, i) => {
